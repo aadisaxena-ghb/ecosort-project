@@ -131,9 +131,10 @@ app.post("/api/classify", async (req, res) => {
   }
 
   try {
-    const matches = retrieve(item, 4);
+    const retrievalResult = retrieve(item, 4);
+    const matches = retrievalResult.matches || [];
     const context = formatContext(matches);
-    const result = await classifyWithContext(item.trim(), context, matches);
+    const result = await classifyWithContext(item.trim(), context, retrievalResult);
     res.json({ result, retrieved: matches.map((m) => m.id) });
   } catch (err) {
     console.error("Classification error:", err);

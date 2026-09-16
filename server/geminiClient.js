@@ -1,36 +1,39 @@
 const MODEL = "gemini-2.5-flash";
 
 /**
- * Intelligent local RAG heuristic classifier that generates rich,
- * contextual waste segregation guidance when no external API key is set.
+ * Intelligent local RAG heuristic classifier that generates accurate,
+ * contextual waste segregation guidance.
  */
-function localClassify(itemDescription, matches = []) {
-  const itemLower = itemDescription.toLowerCase();
+function localClassify(itemDescription, retrievalResult = {}) {
+  const itemLower = itemDescription.toLowerCase().trim();
+  const matches = retrievalResult.matches || (Array.isArray(retrievalResult) ? retrievalResult : []);
+  const hasDirectMatch = retrievalResult.hasDirectMatch ?? (matches.length > 0);
 
-  // 1. High Priority Hazard & Nuclear Checks
-  if (/uranium|plutonium|thorium|radium|radioactive|nuclear|isotope|radiation/.test(itemLower)) {
+  // 1. High-Priority Nuclear & Radioactive (Word boundaries to prevent false positives)
+  if (/\b(uranium|plutonium|thorium|radium|radioactive|nuclear|radiation|isotope|americium)\b/i.test(itemLower)) {
     return {
       category: "hazardous",
       bin_name: "Specialized Radioactive / Nuclear Disposal (DO NOT BIN)",
-      reasoning: "Radioactive elements and nuclear substances (such as Uranium or Radium) emit ionizing radiation. They pose extreme public health risks and must NEVER be placed in any household or municipal waste bin.",
-      tip: "Contact national atomic energy authorities or authorized environmental hazardous containment facilities immediately.",
+      reasoning: "Radioactive elements and nuclear substances (such as Uranium or Radium) emit dangerous ionizing radiation. They must NEVER be placed in any household, municipal, or regular trash bin.",
+      tip: "Contact national atomic energy authorities or licensed hazardous environmental regulators immediately.",
       isLocalFallback: true,
       engine: "EcoSort Local RAG"
     };
   }
 
-  if (/asbestos|cyanide|hydrochloric|sulfuric|acid|mercury|poison|arsenic|explosive|ammunition|gunpowder/.test(itemLower)) {
+  // 2. High-Priority Industrial Toxic Chemicals
+  if (/\b(asbestos|cyanide|hydrochloric|sulfuric|acid|mercury|poison|arsenic|explosive|ammunition|gunpowder)\b/i.test(itemLower)) {
     return {
       category: "hazardous",
       bin_name: "Hazardous Chemical Collection (Red/Black)",
-      reasoning: "Corrosive chemicals, industrial poisons, and hazardous materials cannot be treated at municipal facilities and pose toxic fire or burn hazards.",
+      reasoning: "Corrosive chemicals, toxic poisons, and industrial hazards cannot be processed at municipal compost or recycling facilities.",
       tip: "Keep sealed in original corrosion-resistant containers and schedule a certified hazardous chemical collection.",
       isLocalFallback: true,
       engine: "EcoSort Local RAG"
     };
   }
 
-  // 2. Specific composite/mixed item heuristics
+  // 3. Composite Pizza Box Nuance
   if (itemLower.includes("pizza") && itemLower.includes("box")) {
     return {
       category: "wet",
@@ -42,55 +45,8 @@ function localClassify(itemDescription, matches = []) {
     };
   }
 
-  if (/battery|batteries|power bank|lithium|cell/.test(itemLower)) {
-    return {
-      category: "hazardous",
-      bin_name: "Hazardous Waste Collection (Red/Black)",
-      reasoning: "Batteries contain reactive heavy metals (lithium, lead, cadmium) that can cause landfill fires or toxic groundwater leaching. They must never go into normal household bins.",
-      tip: "Tape over battery terminals with clear tape and drop off at an e-waste or battery recycling bin.",
-      isLocalFallback: true,
-      engine: "EcoSort Local RAG"
-    };
-  }
-
-  if (/medicine|tablet|pill|syrup|capsule|blister pack|syringe/.test(itemLower)) {
-    return {
-      category: "hazardous",
-      bin_name: "Hazardous / Pharmacy Return (Red/Yellow)",
-      reasoning: "Pharmaceuticals can contaminate municipal water systems and encourage antimicrobial resistance. They require high-temperature incineration or pharmacy return.",
-      tip: "Take expired medicines back to participating pharmacies with drug take-back boxes.",
-      isLocalFallback: true,
-      engine: "EcoSort Local RAG"
-    };
-  }
-
-  if (/phone|charger|cable|wire|laptop|computer|electronics|keyboard|mouse|headphone|earphone/.test(itemLower)) {
-    return {
-      category: "ewaste",
-      bin_name: "E-Waste Collection (Grey/Purple)",
-      reasoning: "Electronics and accessories contain recyclable copper and gold alongside toxic flame retardants, requiring dedicated e-waste recycling.",
-      tip: "Store electronics safely until you can drop them at an e-waste collection drive or authorized retail kiosk.",
-      isLocalFallback: true,
-      engine: "EcoSort Local RAG"
-    };
-  }
-
-  if (/glass|bottle|jar/.test(itemLower)) {
-    const isBroken = /broken|shatter/.test(itemLower);
-    return {
-      category: "dry",
-      bin_name: "Dry / Recyclable bin (Blue)",
-      reasoning: "Glass is 100% endlessly recyclable dry waste.",
-      tip: isBroken
-        ? "Wrap broken glass pieces securely in newspaper and mark 'BROKEN GLASS' to protect sanitation workers."
-        : "Give the bottle a quick rinse and recycle with dry recyclables.",
-      isLocalFallback: true,
-      engine: "EcoSort Local RAG"
-    };
-  }
-
-  // 3. Fallback to top matched rule from knowledge base if score matched
-  if (matches.length > 0 && matches[0]) {
+  // 4. If RAG found a direct keyword match in our rules database, use the top rule!
+  if (hasDirectMatch && matches.length > 0 && matches[0]) {
     const top = matches[0];
     return {
       category: top.category || "dry",
@@ -102,11 +58,56 @@ function localClassify(itemDescription, matches = []) {
     };
   }
 
-  // 4. Truly unrecognized generic item
+  // 5. Common Root Word Fallbacks
+  if (/\b(egg|eggs|eggshell|banana|apple|fruit|vegetable|rice|bread|peel|peels|leftover|scraps|meat|food|salad|roti|curry|tea|coffee)\b/i.test(itemLower)) {
+    return {
+      category: "wet",
+      bin_name: "Wet / Organic bin (Green)",
+      reasoning: "Biodegradable organic matter and food scraps belong in the green wet waste bin for composting.",
+      tip: "Keep a small kitchen countertop bin to separate wet food scraps cleanly at the source.",
+      isLocalFallback: true,
+      engine: "EcoSort Local RAG"
+    };
+  }
+
+  if (/\b(bottle|paper|cardboard|box|plastic|can|tin|foil|glass|carton|bag|wrapper|metal)\b/i.test(itemLower)) {
+    return {
+      category: "dry",
+      bin_name: "Dry / Recyclable bin (Blue)",
+      reasoning: "Clean, dry packaging and recyclable materials belong in the blue dry waste bin.",
+      tip: "Rinse food residue from containers before binning to ensure they can be recycled.",
+      isLocalFallback: true,
+      engine: "EcoSort Local RAG"
+    };
+  }
+
+  if (/\b(battery|batteries|medicine|pill|tablet|chemical|paint|sanitary|pad|diaper)\b/i.test(itemLower)) {
+    return {
+      category: "hazardous",
+      bin_name: "Hazardous Waste Collection (Red/Yellow)",
+      reasoning: "Hazardous, sanitary, and chemical items require dedicated segregation for safe disposal.",
+      tip: "Wrap sanitary items in paper and drop batteries/medicines at designated collection kiosks.",
+      isLocalFallback: true,
+      engine: "EcoSort Local RAG"
+    };
+  }
+
+  if (/\b(phone|charger|cable|wire|laptop|computer|electronics|bulb|led|plug|device|appliance)\b/i.test(itemLower)) {
+    return {
+      category: "ewaste",
+      bin_name: "E-Waste Collection (Grey/Purple)",
+      reasoning: "Electronic accessories and broken devices contain recoverable precious metals alongside toxic flame retardants.",
+      tip: "Take old electronic devices to certified municipal or retailer e-waste drop-off bins.",
+      isLocalFallback: true,
+      engine: "EcoSort Local RAG"
+    };
+  }
+
+  // 6. Generic Unlisted Item
   return {
     category: "dry",
-    bin_name: "Dry / General Waste (Blue/Grey)",
-    reasoning: `No specific municipal rule was found for "${itemDescription}". For standard dry, non-hazardous household items, place in the dry waste bin. For chemical or electronic items, check with local authorities.`,
+    bin_name: "Dry / General Waste (Check Local Guidance)",
+    reasoning: `No specific rule was found for "${itemDescription}". For standard dry household items, place in the dry waste bin. If organic or food-based, place in the wet compost bin.`,
     tip: "When in doubt, keep recyclables dry and clean to prevent contamination of other materials.",
     isLocalFallback: true,
     engine: "EcoSort Local RAG"
@@ -116,22 +117,22 @@ function localClassify(itemDescription, matches = []) {
 /**
  * Classifies an item using Google Gemini API grounded in municipal RAG context.
  */
-async function classifyWithContext(itemDescription, contextText, retrievedMatches = []) {
+async function classifyWithContext(itemDescription, contextText, retrievalResult = {}) {
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
   if (!apiKey || apiKey === "your_gemini_api_key_here") {
-    return localClassify(itemDescription, retrievedMatches);
+    return localClassify(itemDescription, retrievalResult);
   }
 
   const systemInstruction = `You are EcoSort AI, an expert municipal waste-segregation advisor for UN SDG 12.
 You are given (a) an item description from a user and (b) grounding context retrieved from a municipal waste-rules knowledge base.
 Classify the item into one of the 4 streams:
-- "wet": Biodegradable organic matter, food scraps, garden waste.
+- "wet": Biodegradable organic matter, food scraps, garden waste, eggshells, fruit peels.
 - "dry": Recyclable clean paper, cardboard, plastic containers, glass, clean metals.
 - "hazardous": Batteries, medicines, toxic chemicals, radioactive substances (e.g. Uranium/Radium), sanitary biomedical waste.
 - "ewaste": Electronic devices, chargers, wires, circuits, broken appliances.
 
-If an item is dangerous, toxic, or radioactive (like Uranium), you MUST classify it as "hazardous" with specialized warning.
+If an item is dangerous or radioactive (like Uranium), classify as "hazardous". If food/eggshell, classify as "wet".
 
 Retrieved Context:
 ${contextText}
@@ -163,20 +164,20 @@ Respond ONLY with valid JSON in this exact shape:
     });
 
     if (!response.ok) {
-      console.warn(`Gemini API error ${response.status}, falling back to local classifier`);
-      return localClassify(itemDescription, retrievedMatches);
+      console.warn(`Gemini API error ${response.status}, using local RAG`);
+      return localClassify(itemDescription, retrievalResult);
     }
 
     const data = await response.json();
     const candidate = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!candidate) return localClassify(itemDescription, retrievedMatches);
+    if (!candidate) return localClassify(itemDescription, retrievalResult);
 
     const parsed = JSON.parse(candidate);
     parsed.engine = "Google Gemini AI";
     return parsed;
   } catch (err) {
     console.warn("Gemini API call failed, using local RAG:", err.message);
-    return localClassify(itemDescription, retrievedMatches);
+    return localClassify(itemDescription, retrievalResult);
   }
 }
 

@@ -8,19 +8,34 @@ function getRules() {
 }
 
 /**
- * Intelligent keyword and semantic retrieval over municipal waste rules.
+ * Robust tokenized and bidirectional keyword retrieval.
  */
 function retrieve(query, topK = 4) {
   const rules = getRules();
-  const normalizedQuery = query.toLowerCase();
+  const cleanQuery = query.toLowerCase().trim();
+  const queryTokens = cleanQuery.split(/[\s,./\-_+]+/).filter((t) => t.length > 0);
 
   const scored = rules.map((rule) => {
     let score = 0;
     for (const keyword of rule.keywords) {
-      const kLower = keyword.toLowerCase();
-      if (normalizedQuery.includes(kLower)) {
-        // Boost exact matches and longer specific keywords
-        score += kLower.length * (normalizedQuery === kLower ? 3 : 1.5);
+      const kLower = keyword.toLowerCase().trim();
+      const kTokens = kLower.split(/\s+/);
+
+      // Exact full match
+      if (cleanQuery === kLower) {
+        score += 100 + kLower.length * 2;
+      }
+      // Substring match
+      else if (cleanQuery.includes(kLower)) {
+        score += 50 + kLower.length;
+      }
+      // Token overlap
+      else if (queryTokens.some((qt) => qt === kLower || kTokens.includes(qt))) {
+        score += 30 + kLower.length;
+      }
+      // Query token is prefix/substring of keyword
+      else if (queryTokens.some((qt) => qt.length >= 3 && kLower.includes(qt))) {
+        score += 15;
       }
     }
     return { rule, score };
@@ -29,10 +44,14 @@ function retrieve(query, topK = 4) {
   const matched = scored.filter((s) => s.score > 0).sort((a, b) => b.score - a.score);
 
   if (matched.length > 0) {
-    return matched.slice(0, topK).map((s) => s.rule);
+    return {
+      matches: matched.slice(0, topK).map((s) => s.rule),
+      hasDirectMatch: true,
+      topScore: matched[0].score
+    };
   }
 
-  // If no match was found, return a balanced sample from each category
+  // Fallback balanced sample
   const fallback = [];
   const seen = new Set();
   for (const rule of rules) {
@@ -41,7 +60,12 @@ function retrieve(query, topK = 4) {
       seen.add(rule.category);
     }
   }
-  return fallback;
+
+  return {
+    matches: fallback,
+    hasDirectMatch: false,
+    topScore: 0
+  };
 }
 
 function formatContext(matches) {
