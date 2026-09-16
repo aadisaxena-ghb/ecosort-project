@@ -40,7 +40,7 @@ function escapeHtml(str){
 function createResultCard(query, data){
   const style = BIN_STYLES[data.category] || BIN_STYLES.dry;
   const card = document.createElement('div');
-  card.className = 'result-card';
+  card.className = 'result-card reveal-zoom-in is-visible card-tilt';
   card.innerHTML = `
     <div class="query">Item analyzed: <b>${escapeHtml(query)}</b></div>
     <div class="bin-row">
@@ -279,10 +279,11 @@ async function loadDirectory(){
         return;
       }
 
-      grid.innerHTML = rules.map(rule => {
+      grid.innerHTML = rules.map((rule, idx) => {
         const style = BIN_STYLES[rule.category] || BIN_STYLES.dry;
+        const staggerClass = `stagger-${(idx % 6) + 1}`;
         return `
-          <div class="directory-card">
+          <div class="directory-card card-tilt reveal-fly-up is-visible ${staggerClass}">
             <div class="card-head">
               <span class="bin-tag" style="background:${style.bg}">${style.label}</span>
             </div>

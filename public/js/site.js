@@ -495,10 +495,12 @@ window.playChime = function(type = 'success'){
   sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 })();
 
-// ---------- 12. Scroll Reveal Observer ----------
+// ---------- 12. Dynamic Flying Scroll Reveal Observer ----------
 (function initReveal(){
-  const items = document.querySelectorAll('.reveal');
+  const revealSelectors = '.reveal, .reveal-fly-up, .reveal-fly-left, .reveal-fly-right, .reveal-zoom-in, .reveal-flip-3d';
+  const items = document.querySelectorAll(revealSelectors);
   if(!items.length) return;
+  
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -506,7 +508,8 @@ window.playChime = function(type = 'success'){
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  
   items.forEach(item => observer.observe(item));
 })();
 
@@ -547,7 +550,7 @@ window.playChime = function(type = 'success'){
   });
 })();
 
-// ---------- 15. Dynamic Scroll Engine (Progress Bar, Parallax & Percentage Pill) ----------
+// ---------- 15. Dynamic Scroll Engine (Progress Bar, Flying Sparks & Percentage Pill) ----------
 (function initScrollDynamics(){
   // Ensure top progress bar exists
   let progressBar = document.getElementById('scrollProgressBar');
@@ -577,11 +580,38 @@ window.playChime = function(type = 'success'){
 
   const heroBlobs = document.querySelectorAll('.blob');
   let ticking = false;
+  let lastScrollY = window.scrollY;
+  let lastSparkTime = 0;
+  const sparkSymbols = ['🍃', '✨', '🌱', '♻️', '💧', '🌿', '🟢'];
+
+  function spawnFlyingSpark(x, y, isDown){
+    const now = performance.now();
+    if(now - lastSparkTime < 240) return; // limit frequency
+    lastSparkTime = now;
+
+    const spark = document.createElement('div');
+    spark.className = 'flying-eco-spark';
+    spark.textContent = sparkSymbols[Math.floor(Math.random() * sparkSymbols.length)];
+    spark.style.left = `${x}px`;
+    spark.style.top = `${y}px`;
+
+    const tx = (Math.random() - 0.5) * 140;
+    const ty = isDown ? -(Math.random() * 90 + 40) : (Math.random() * 90 + 40);
+    const rot = (Math.random() - 0.5) * 60;
+
+    spark.style.setProperty('--tx', `${tx}px`);
+    spark.style.setProperty('--ty', `${ty}px`);
+    spark.style.setProperty('--rot', `${rot}deg`);
+
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 1600);
+  }
 
   function onScroll(){
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    const delta = scrollTop - lastScrollY;
 
     // 1. Update top gradient progress bar
     if(progressBar){
@@ -590,7 +620,7 @@ window.playChime = function(type = 'success'){
 
     // 2. Update floating scroll pill & visibility
     if(scrollPill){
-      if(scrollTop > 220){
+      if(scrollTop > 200){
         scrollPill.classList.add('visible');
         if(percentLabel) percentLabel.textContent = `${Math.round(scrollPercent)}%`;
       } else {
@@ -606,6 +636,14 @@ window.playChime = function(type = 'success'){
       });
     }
 
+    // 4. Dynamic Flying Eco Sparks on active slide down
+    if(Math.abs(delta) > 15){
+      const spawnX = Math.random() * (window.innerWidth - 120) + 60;
+      const spawnY = Math.random() * (window.innerHeight * 0.6) + (window.innerHeight * 0.2);
+      spawnFlyingSpark(spawnX, spawnY, delta > 0);
+    }
+
+    lastScrollY = scrollTop;
     ticking = false;
   }
 
@@ -619,4 +657,5 @@ window.playChime = function(type = 'success'){
   // Initial calculation
   onScroll();
 })();
+
 
