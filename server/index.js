@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require("fs");
 
 const { retrieve, formatContext } = require("./rag");
-const { classifyWithContext } = require("./claudeClient");
+const { classifyWithContext } = require("./geminiClient");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,9 +25,15 @@ try {
 
 // Health check
 app.get("/api/health", (req, res) => {
+  const hasKey = Boolean(
+    (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== "your_gemini_api_key_here") ||
+    (process.env.GOOGLE_API_KEY && process.env.GOOGLE_API_KEY !== "your_google_api_key_here")
+  );
+
   res.json({
     status: "ok",
-    hasApiKey: Boolean(process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== "your_anthropic_api_key_here"),
+    aiProvider: "Google Gemini",
+    hasApiKey: hasKey,
     rulesCount: rulesData.length
   });
 });

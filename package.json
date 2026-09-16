@@ -1,14 +1,21 @@
 {
   "name": "ecosort-ai",
   "version": "1.0.0",
-  "description": "AI-powered waste segregation advisor built for SDG 12 (Responsible Consumption & Production). Classifies described items into the correct waste category using a lightweight retrieval-augmented generation (RAG) pipeline over municipal waste-rule data, backed by the Claude API.",
+  "description": "AI-powered waste segregation advisor built for SDG 12 (Responsible Consumption & Production). Classifies described items into the correct waste category using a lightweight retrieval-augmented generation (RAG) pipeline over municipal waste-rule data, powered by Google Gemini AI.",
   "main": "server/index.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server/index.js",
     "dev": "node --watch server/index.js"
   },
-  "keywords": ["ai", "sustainability", "rag", "sdg12", "waste-management"],
+  "keywords": [
+    "ai",
+    "gemini",
+    "sustainability",
+    "rag",
+    "sdg12",
+    "waste-management"
+  ],
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",

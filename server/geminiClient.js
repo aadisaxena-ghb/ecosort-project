@@ -1,21 +1,19 @@
-const API_URL = "https://api.anthropic.com/v1/messages";
-const MODEL = "claude-sonnet-4-6";
+const MODEL = "gemini-2.5-flash";
 
 /**
  * Intelligent local RAG heuristic classifier that generates rich,
- * contextual waste segregation guidance even when no external API key is set.
+ * contextual waste segregation guidance when no external API key is set.
  */
-function localClassify(itemDescription, matches) {
+function localClassify(itemDescription, matches = []) {
   const topMatch = matches[0] || {
     category: "dry",
-    bin_name: "Dry / Recyclable bin",
+    bin_name: "Dry / Recyclable bin (Blue)",
     guidance: "Most dry non-organic household packaging should be segregated into dry waste.",
     tip: "Keep recyclables clean and dry before disposal."
   };
 
   const itemLower = itemDescription.toLowerCase();
 
-  // Fine-tune reasoning based on specific query nuances
   let reasoning = `${topMatch.guidance}`;
   let tip = `${topMatch.tip}`;
   let binName = topMatch.bin_name;
@@ -55,55 +53,77 @@ function localClassify(itemDescription, matches) {
     bin_name: binName,
     reasoning,
     tip,
-    isLocalFallback: true
+    isLocalFallback: true,
+    engine: "EcoSort Local RAG"
   };
 }
 
+/**
+ * Classifies an item using Google Gemini API grounded in municipal RAG context.
+ */
 async function classifyWithContext(itemDescription, contextText, retrievedMatches = []) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  
-  // If no API key is provided, use our high-accuracy local RAG classifier
-  if (!apiKey || apiKey === "your_anthropic_api_key_here") {
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+
+  // If no Google API key is configured, use local RAG classifier
+  if (!apiKey || apiKey === "your_gemini_api_key_here") {
     return localClassify(itemDescription, retrievedMatches);
   }
 
-  const systemPrompt = `You are EcoSort AI, a waste-segregation advisor. You are given (a) an item description from a user and (b) grounding context retrieved from a municipal waste-rules knowledge base. Use ONLY the retrieved context to decide the category — do not invent rules beyond it. If the item mixes categories, pick the single most important one for safe handling and explain the nuance.
+  const systemInstruction = `You are EcoSort AI, an expert municipal waste-segregation advisor for UN SDG 12.
+You are given (a) an item description from a user and (b) grounding context retrieved from a municipal waste-rules knowledge base.
+Use the retrieved context to decide the category (wet, dry, hazardous, ewaste). If the item mixes categories, pick the single most important one for safe handling and explain the nuance.
 
-Retrieved context:
+Retrieved Context:
 ${contextText}
 
-Respond ONLY with valid JSON, no markdown fences, no preamble, in this exact shape:
-{"category": "wet|dry|hazardous|ewaste", "bin_name": "short human label", "reasoning": "1-2 sentences referencing the specific item(s) and the retrieved guidance", "tip": "one short, concrete habit tied to this specific item"}`;
+You must return valid JSON matching this schema:
+{
+  "category": "wet" | "dry" | "hazardous" | "ewaste",
+  "bin_name": "short human label (e.g. Wet / Organic bin (Green))",
+  "reasoning": "1-2 concise sentences referencing the specific item and grounding guidance",
+  "tip": "one short, concrete habit tied to this item"
+}`;
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
+
+  const payload = {
+    contents: [
+      {
+        role: "user",
+        parts: [{ text: itemDescription }]
+      }
+    ],
+    systemInstruction: {
+      parts: [{ text: systemInstruction }]
+    },
+    generationConfig: {
+      temperature: 0.2,
+      responseMimeType: "application/json"
+    }
+  };
 
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 500,
-        system: systemPrompt,
-        messages: [{ role: "user", content: itemDescription }],
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
-      console.warn(`Claude API returned status ${response.status}. Falling back to local RAG engine.`);
+      const errText = await response.text();
+      console.warn(`Google Gemini API error (${response.status}): ${errText}. Using local RAG fallback.`);
       return localClassify(itemDescription, retrievedMatches);
     }
 
     const data = await response.json();
-    const textBlock = (data.content || []).find((b) => b.type === "text");
-    if (!textBlock) return localClassify(itemDescription, retrievedMatches);
+    const candidate = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!candidate) return localClassify(itemDescription, retrievedMatches);
 
-    const cleaned = textBlock.text.trim().replace(/^```json\s*|```$/g, "");
-    return JSON.parse(cleaned);
+    const parsed = JSON.parse(candidate);
+    parsed.engine = "Google Gemini AI";
+    return parsed;
   } catch (err) {
-    console.warn("Claude API call failed, using local RAG fallback:", err.message);
+    console.warn("Gemini API call exception, using local RAG fallback:", err.message);
     return localClassify(itemDescription, retrievedMatches);
   }
 }
