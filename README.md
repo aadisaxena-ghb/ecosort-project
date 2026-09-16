@@ -37,12 +37,23 @@ Response        ──►  Bin Category + Color Tag + Plain-Language Reason + Ha
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & AI Integration
 
+- **AI Ideation & Workflow Design:** **IBM BOB** (used during Design Thinking stages to frame personas, define problem statements, and curate the municipal rules dataset).
+- **AI Classification Engine:** Google Gemini API (`gemini-2.5-flash`), paired with a lightweight Retrieval-Augmented Generation (RAG) pipeline.
 - **Backend:** Node.js, Express
-- **AI:** Google Gemini API (`gemini-2.5-flash`), with built-in smart local RAG fallback
 - **Frontend:** Vanilla HTML5, CSS3 Custom Properties (Design Tokens & Glassmorphism), Vanilla JavaScript, Chart.js
 - **No Heavy Build Steps:** Fast, lightweight, and responsive across all devices.
+
+---
+
+## 💡 Incorporation of IBM BOB
+
+**IBM BOB** was incorporated into the project lifecycle across multiple stages:
+1. **Ideation & Problem Definition (Stage 1 & 2):** Used IBM BOB to analyze municipal waste reports (CPCB), profile user pain points, and craft the central Design Thinking question: *"How might we use AI to guide instant, accurate waste segregation so that households and campuses can become more sustainable?"*
+2. **Knowledge Base Structuring:** Utilized IBM BOB to extract and organize Indian Solid Waste Management (SWM) rules into structured JSON grounding categories (Wet, Dry, Hazardous, E-Waste).
+3. **Prompt & RAG Architecture Design:** Iteratively refined system prompts and contextual retrieval schemas with IBM BOB to ensure explainable, hallucination-free outputs.
+
 
 ---
 
