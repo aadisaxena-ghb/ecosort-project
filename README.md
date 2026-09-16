@@ -1,5 +1,11 @@
 # EcoSort AI 🌿
 
+[![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![RAG Architecture](https://img.shields.io/badge/Pipeline-Local%20RAG%20Engine-D98F2B?style=for-the-badge&logo=fastapi&logoColor=white)](https://github.com/aadisaxena-ghb/ecosort-project)
+[![JavaScript](https://img.shields.io/badge/Language-JavaScript%20ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![UN SDG 12](https://img.shields.io/badge/UN%20SDG-12%20Responsible%20Consumption-00689D?style=for-the-badge)](https://sdgs.un.org/goals/goal12)
+
 An intelligent, AI-powered waste segregation advisor that tells you exactly which bin an item belongs in — **Wet**, **Dry**, **Hazardous**, or **E-Waste** — with clear reasoning and practical habit tips, grounded in municipal waste-segregation rules.
 
 Aligned with **UN SDG 12: Responsible Consumption and Production** (secondary: SDG 11, Sustainable Cities and Communities).
