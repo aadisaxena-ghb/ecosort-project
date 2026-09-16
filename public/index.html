@@ -60,10 +60,21 @@
             <p class="kicker">✨ AI-Powered &middot; UN SDG 12</p>
             <h1>Every item has<br/><em>a right place.</em><br/>Find it instantly.</h1>
             <p class="sub">Describe anything you're about to throw away or snap a picture. EcoSort AI uses a retrieval-augmented intelligence pipeline over municipal rules to deliver the exact bin, reasoning, and practical habits for a cleaner planet.</p>
-            <div class="cta-row">
-              <a class="btn btn-primary cursor-pointer" href="tool.html">🚀 Try EcoSort AI &rarr;</a>
+            <div class="cta-row" style="margin-bottom: 24px;">
+              <a class="btn btn-primary cursor-pointer" href="tool.html">🚀 Try Full Advisor &rarr;</a>
               <a class="btn btn-ghost cursor-pointer" href="impact.html">📊 See the data</a>
             </div>
+
+            <!-- Instant Quick Sorter Widget -->
+            <div style="background: var(--paper-translucent); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: var(--shadow-sm);">
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--moss); margin-bottom:8px;">⚡ Instant Test</div>
+              <form id="heroQuickForm" style="display:flex; gap:8px;">
+                <input type="text" id="heroQuickInput" placeholder="Try 'used battery', 'pizza box', 'milk carton'..." style="flex:1; border:1px solid var(--line); background:var(--paper); border-radius:8px; padding:10px 14px; font-size:13.5px; color:var(--ink); outline:none;" required />
+                <button class="btn btn-primary cursor-pointer" type="submit" style="padding:10px 16px; font-size:13.5px;">Sort</button>
+              </form>
+              <div id="heroQuickResult" style="display:none; margin-top:12px; padding:12px; border-radius:8px; background:var(--bg-alt); font-size:13px; line-height:1.45;"></div>
+            </div>
+
           </div>
           <div class="hero-art reveal is-visible">
             <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">

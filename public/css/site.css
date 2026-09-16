@@ -932,3 +932,63 @@ footer.page-footer{
   border-top: 1px solid var(--line);
   padding-top: 20px;
 }
+
+/* ---------- Toast Notifications ---------- */
+.toast-container{
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast-notification{
+  background: var(--forest-deep);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+[data-theme="dark"] .toast-notification{
+  background: #1B2C21;
+  border-color: var(--moss);
+}
+.toast-notification.show{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Copy button on results */
+.copy-advice-btn{
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+.copy-advice-btn:hover{
+  border-color: var(--moss);
+  color: var(--ink);
+  background: var(--bg-alt);
+}
+

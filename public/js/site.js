@@ -1,3 +1,54 @@
+// ---------- Web Audio API Sound Chime FX ----------
+window.playChime = function(type = 'success'){
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if(!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    const now = ctx.currentTime;
+    if(type === 'success'){
+      osc.frequency.setValueAtTime(523.25, now); // C5
+      osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+      osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } else if(type === 'click'){
+      osc.frequency.setValueAtTime(440, now);
+      gain.gain.setValueAtTime(0.04, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    }
+  } catch(e){}
+};
+
+// ---------- Toast Notification System ----------
+(function initToast(){
+  const toastContainer = document.createElement('div');
+  toastContainer.className = 'toast-container';
+  document.body.appendChild(toastContainer);
+
+  window.showToast = function(msg, icon = '✨'){
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `<span>${icon}</span><span>${msg}</span>`;
+    toastContainer.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 300);
+    }, 2800);
+  };
+})();
+
 // ---------- Dark / Light Mode Theme Controller ----------
 (function initTheme(){
   const savedTheme = localStorage.getItem('ecosort-theme') || 
@@ -11,6 +62,8 @@
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('ecosort-theme', next);
     updateThemeButtons(next);
+    window.playChime('click');
+    window.showToast(`Switched to ${next === 'dark' ? 'Dark Mode' : 'Light Mode'}`, next === 'dark' ? '🌙' : '☀️');
   };
 
   function updateThemeButtons(theme){
@@ -40,7 +93,6 @@
     if (raw) streakData = JSON.parse(raw);
   } catch(e){}
 
-  // Calculate streak continuity
   if (streakData.lastActive !== today) {
     const last = new Date(streakData.lastActive);
     const curr = new Date(today);
@@ -168,3 +220,44 @@
     if(href === current) a.classList.add('active');
   });
 })();
+
+// ---------- Homepage Hero Quick Sorter ----------
+(function initHeroQuickSorter(){
+  const form = document.getElementById('heroQuickForm');
+  const input = document.getElementById('heroQuickInput');
+  const resultBox = document.getElementById('heroQuickResult');
+  if(!form || !input || !resultBox) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = input.value.trim();
+    if(!query) return;
+
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = '<em>Analyzing item...</em>';
+
+    try {
+      const res = await fetch('/api/classify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item: query })
+      });
+      const data = await res.json();
+      if(!res.ok) throw new Error(data.error || 'Sorting failed');
+
+      const resObj = data.result || {};
+      resultBox.innerHTML = `
+        <div style="font-weight:700; color:var(--forest); margin-bottom:4px;">
+          🏷️ ${resObj.bin_name || 'Classified'}
+        </div>
+        <div>${resObj.reasoning}</div>
+        <div style="margin-top:6px; font-size:12px; color:var(--muted);">💡 <b>Tip:</b> ${resObj.tip}</div>
+      `;
+      window.playChime?.('success');
+      window.showToast?.(`Sorted: ${resObj.bin_name}`, '🎯');
+    } catch(err) {
+      resultBox.innerHTML = `<span style="color:var(--hazard);">Error: ${err.message}</span>`;
+    }
+  });
+})();
+

@@ -50,7 +50,19 @@ function createResultCard(query, data){
     </div>
     <p class="reason">${escapeHtml(data.reasoning)}</p>
     <p class="tip"><b>💡 Habit Tip:</b> ${escapeHtml(data.tip)}</p>
+    <button class="copy-advice-btn" type="button">📋 Copy Advice</button>
   `;
+
+  const copyBtn = card.querySelector('.copy-advice-btn');
+  copyBtn.addEventListener('click', () => {
+    const textToCopy = `EcoSort AI Result:\nItem: ${query}\nBin: ${data.bin_name || style.label}\nReasoning: ${data.reasoning}\nTip: ${data.tip}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      window.showToast?.('Copied advice to clipboard!', '📋');
+      window.playChime?.('click');
+    });
+  });
+
+  window.playChime?.('success');
   return card;
 }
 
