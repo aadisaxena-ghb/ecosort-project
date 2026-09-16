@@ -10,7 +10,12 @@
 
 <div class="topbar">
   <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
-  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="topbar-right">
+    <button class="theme-toggle-btn" aria-label="Toggle theme" style="margin:0; padding:6px 10px;">
+      <span class="icon">🌙</span>
+    </button>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </div>
 <div class="overlay"></div>
 
@@ -18,12 +23,25 @@
   <aside class="sidebar">
     <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
     <nav>
-      <a href="index.html"><span class="dot"></span>Home</a>
+      <a href="index.html" class="active"><span class="dot"></span>Home</a>
       <a href="tool.html"><span class="dot"></span>Try the Tool</a>
       <a href="impact.html"><span class="dot"></span>Impact &amp; Data</a>
       <a href="news.html"><span class="dot"></span>News</a>
       <a href="about.html"><span class="dot"></span>About</a>
     </nav>
+
+    <div class="streak-widget">
+      <div class="streak-icon">🔥</div>
+      <div class="streak-info">
+        <span class="streak-count streak-count-val">1 Day</span>
+        <span class="streak-label">Eco-Sorting Streak</span>
+      </div>
+    </div>
+
+    <button class="theme-toggle-btn">
+      <span class="icon">🌙</span> <span>Dark Mode</span>
+    </button>
+
     <div class="sidebar-footer">
       <strong>SDG 12</strong><br/>
       Responsible Consumption &amp; Production<br/><br/>
@@ -39,30 +57,30 @@
         <span class="blob blob-2"></span>
         <div class="hero-grid">
           <div class="reveal is-visible">
-            <p class="kicker">AI-Powered &middot; SDG 12</p>
+            <p class="kicker">✨ AI-Powered &middot; UN SDG 12</p>
             <h1>Every item has<br/><em>a right place.</em><br/>Find it instantly.</h1>
-            <p class="sub">Describe anything you're about to throw away, and EcoSort AI tells you the correct bin, why, and one habit that makes sorting easier next time — grounded in real waste-segregation rules, not guesswork.</p>
+            <p class="sub">Describe anything you're about to throw away or snap a picture. EcoSort AI uses a retrieval-augmented intelligence pipeline over municipal rules to deliver the exact bin, reasoning, and practical habits for a cleaner planet.</p>
             <div class="cta-row">
-              <a class="btn btn-primary cursor-pointer" href="tool.html">Try EcoSort AI &rarr;</a>
-              <a class="btn btn-ghost cursor-pointer" href="impact.html">See the data</a>
+              <a class="btn btn-primary cursor-pointer" href="tool.html">🚀 Try EcoSort AI &rarr;</a>
+              <a class="btn btn-ghost cursor-pointer" href="impact.html">📊 See the data</a>
             </div>
           </div>
           <div class="hero-art reveal is-visible">
             <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="200" cy="200" r="170" fill="#E7F0DF"/>
-              <circle cx="200" cy="200" r="128" fill="#FFFFFF"/>
+              <circle cx="200" cy="200" r="170" fill="var(--bg-alt)"/>
+              <circle cx="200" cy="200" r="128" fill="var(--paper)"/>
               <g>
-                <rect x="120" y="150" width="60" height="90" rx="10" fill="#4C7A3D"/>
-                <rect x="128" y="132" width="44" height="20" rx="6" fill="#4C7A3D"/>
-                <rect x="220" y="130" width="60" height="110" rx="10" fill="#2E5C8A"/>
-                <rect x="228" y="112" width="44" height="20" rx="6" fill="#2E5C8A"/>
+                <rect x="120" y="150" width="60" height="90" rx="10" fill="var(--wet)"/>
+                <rect x="128" y="132" width="44" height="20" rx="6" fill="var(--wet)"/>
+                <rect x="220" y="130" width="60" height="110" rx="10" fill="var(--dry)"/>
+                <rect x="228" y="112" width="44" height="20" rx="6" fill="var(--dry)"/>
                 <circle cx="150" cy="195" r="9" fill="#EAF1E5"/>
                 <circle cx="150" cy="215" r="9" fill="#EAF1E5"/>
                 <rect x="240" y="150" width="20" height="60" rx="4" fill="#EAF1E5"/>
               </g>
-              <path d="M90 300 Q200 340 310 300" stroke="#A9CB89" stroke-width="6" fill="none" stroke-linecap="round"/>
-              <circle cx="95" cy="120" r="10" fill="#D98F2B" opacity="0.85"/>
-              <circle cx="305" cy="90" r="7" fill="#6E9B4E" opacity="0.85"/>
+              <path d="M90 300 Q200 340 310 300" stroke="var(--moss-light)" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="95" cy="120" r="10" fill="var(--amber)" opacity="0.85"/>
+              <circle cx="305" cy="90" r="7" fill="var(--moss)" opacity="0.85"/>
             </svg>
           </div>
         </div>
@@ -78,59 +96,53 @@
           <span class="label">Share scientifically segregated at source today</span>
         </div>
         <div class="stat-card reveal">
-          <span class="num">4</span>
-          <span class="label">Waste streams EcoSort AI classifies into</span>
+          <span class="num">4 Streams</span>
+          <span class="label">Wet, Dry, Hazardous, &amp; E-Waste segregation</span>
         </div>
         <div class="stat-card reveal">
-          <span class="num">&lt;5<span style="font-size:16px">s</span></span>
-          <span class="label">Typical time to get a grounded answer</span>
+          <span class="num">&lt; 1<span style="font-size:16px">s</span></span>
+          <span class="label">Instant grounded answer response time</span>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head reveal">
           <div>
-            <p class="kicker">How it helps</p>
+            <p class="kicker">Why EcoSort AI</p>
             <h2 class="section-title">Built around one real problem</h2>
           </div>
         </div>
         <div class="feature-grid">
           <div class="feature-card reveal">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#2B4F38" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#2B4F38" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            </div>
+            <div class="icon">🎯</div>
             <h3>Grounded, not guessed</h3>
-            <p>A retrieval step pulls the exact rule for your item from a local waste-rules knowledge base before the AI answers — so guidance stays consistent and explainable.</p>
+            <p>A fast retrieval step pulls municipal guidelines from a local knowledge base before generating responses — ensuring guidance is explainable and consistent.</p>
           </div>
           <div class="feature-card reveal">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2B4F38" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#2B4F38" stroke-width="1.6" stroke-linecap="round"/></svg>
-            </div>
-            <h3>Instant answers</h3>
-            <p>No more guessing at the bin or hunting for a poster. Type it in plain language and get a clear, confident answer in seconds.</p>
+            <div class="icon">📸</div>
+            <h3>Smart camera scanner</h3>
+            <p>Snap a photo of packaging or upload an image directly to classify complex mixed waste on the go.</p>
           </div>
           <div class="feature-card reveal">
-            <div class="icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10-1 0-4-2-4-2z" stroke="#2B4F38" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            </div>
-            <h3>Built responsibly</h3>
-            <p>Every answer explains its reasoning, works across varied phrasing, and never asks for personal data — designed with fairness, transparency, and privacy in mind.</p>
+            <div class="icon">🌱</div>
+            <h3>Habit building &amp; streaks</h3>
+            <p>Earn Eco-Badges, maintain daily sorting streaks, and calculate your household's annual landfill diversion.</p>
           </div>
         </div>
       </section>
 
       <section class="section reveal">
-        <div style="background: var(--forest-deep); border-radius: 20px; padding: 46px 44px; display:flex; align-items:center; justify-content:space-between; gap: 24px; flex-wrap:wrap;">
+        <div style="background: linear-gradient(135deg, var(--forest-deep), #1b3826); border-radius: 20px; padding: 46px 44px; display:flex; align-items:center; justify-content:space-between; gap: 24px; flex-wrap:wrap; box-shadow: var(--shadow);">
           <div>
             <h2 class="section-title" style="color:#fff; margin-bottom:8px;">Ready to sort something?</h2>
-            <p style="color:#B9CBB1; margin:0; max-width: 46ch;">Describe any item and see EcoSort AI reason through it in real time.</p>
+            <p style="color:#B9CBB1; margin:0; max-width: 48ch;">Type an item, upload a photo, or test your skills in the Eco-Quiz.</p>
           </div>
-          <a class="btn btn-primary cursor-pointer" href="tool.html" style="background:#fff; color:var(--forest-deep);">Open the tool &rarr;</a>
+          <a class="btn btn-primary cursor-pointer" href="tool.html" style="background:#fff; color:var(--forest-deep);">Open EcoSort AI &rarr;</a>
         </div>
       </section>
 
       <footer class="page-footer">
-        EcoSort AI &middot; A final project for the 1M1B AI for Sustainability Virtual Internship, aligned with UN SDG 12.
+        EcoSort AI &middot; A project for the 1M1B AI for Sustainability Virtual Internship, aligned with UN SDG 12 (Responsible Consumption &amp; Production).
       </footer>
 
     </div>

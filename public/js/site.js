@@ -1,3 +1,67 @@
+// ---------- Dark / Light Mode Theme Controller ----------
+(function initTheme(){
+  const savedTheme = localStorage.getItem('ecosort-theme') || 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  window.toggleTheme = function(){
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('ecosort-theme', next);
+    updateThemeButtons(next);
+  };
+
+  function updateThemeButtons(theme){
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+      const isDark = theme === 'dark';
+      btn.innerHTML = `<span class="icon">${isDark ? '☀️' : '🌙'}</span> <span>${isDark ? 'Light Mode' : 'Dark Mode'}</span>`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateThemeButtons(document.documentElement.getAttribute('data-theme') || 'light');
+    
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', window.toggleTheme);
+    });
+  });
+})();
+
+// ---------- User Eco-Streak Tracker ----------
+(function initStreak(){
+  const STREAK_KEY = 'ecosort_streak_data';
+  const today = new Date().toISOString().split('T')[0];
+
+  let streakData = { count: 1, lastActive: today };
+  try {
+    const raw = localStorage.getItem(STREAK_KEY);
+    if (raw) streakData = JSON.parse(raw);
+  } catch(e){}
+
+  // Calculate streak continuity
+  if (streakData.lastActive !== today) {
+    const last = new Date(streakData.lastActive);
+    const curr = new Date(today);
+    const diffDays = Math.round((curr - last) / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) {
+      streakData.count += 1;
+    } else if (diffDays > 1) {
+      streakData.count = 1;
+    }
+    streakData.lastActive = today;
+    localStorage.setItem(STREAK_KEY, JSON.stringify(streakData));
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.streak-count-val').forEach(el => {
+      el.textContent = `${streakData.count} Day${streakData.count > 1 ? 's' : ''}`;
+    });
+  });
+})();
+
 // ---------- Mobile sidebar toggle ----------
 (function initSidebar(){
   const sidebar = document.querySelector('.sidebar');
@@ -11,7 +75,7 @@
   toggleBtn.addEventListener('click', () => {
     sidebar.classList.contains('open') ? close() : open();
   });
-  overlay.addEventListener('click', close);
+  if(overlay) overlay.addEventListener('click', close);
   sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 })();
 
@@ -44,7 +108,7 @@
   }
   loop();
 
-  const interactiveSelector = 'a, button, .chip, .cursor-pointer, input, textarea';
+  const interactiveSelector = 'a, button, .chip, .cursor-pointer, input, textarea, .tab-btn, .pill-btn, .quiz-option-btn';
   document.addEventListener('mouseover', (e) => {
     if(e.target.closest(interactiveSelector)) ring.classList.add('is-active');
   });
@@ -64,7 +128,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
   items.forEach(item => observer.observe(item));
 })();
 

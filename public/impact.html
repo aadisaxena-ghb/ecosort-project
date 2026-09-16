@@ -11,7 +11,12 @@
 
 <div class="topbar">
   <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
-  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="topbar-right">
+    <button class="theme-toggle-btn" aria-label="Toggle theme" style="margin:0; padding:6px 10px;">
+      <span class="icon">🌙</span>
+    </button>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </div>
 <div class="overlay"></div>
 
@@ -21,10 +26,23 @@
     <nav>
       <a href="index.html"><span class="dot"></span>Home</a>
       <a href="tool.html"><span class="dot"></span>Try the Tool</a>
-      <a href="impact.html"><span class="dot"></span>Impact &amp; Data</a>
+      <a href="impact.html" class="active"><span class="dot"></span>Impact &amp; Data</a>
       <a href="news.html"><span class="dot"></span>News</a>
       <a href="about.html"><span class="dot"></span>About</a>
     </nav>
+
+    <div class="streak-widget">
+      <div class="streak-icon">🔥</div>
+      <div class="streak-info">
+        <span class="streak-count streak-count-val">1 Day</span>
+        <span class="streak-label">Eco-Sorting Streak</span>
+      </div>
+    </div>
+
+    <button class="theme-toggle-btn">
+      <span class="icon">🌙</span> <span>Dark Mode</span>
+    </button>
+
     <div class="sidebar-footer">
       <strong>SDG 12</strong><br/>
       Responsible Consumption &amp; Production<br/><br/>
@@ -34,9 +52,11 @@
 
   <main class="main">
     <div class="page">
-      <p class="kicker">Why It Matters</p>
-      <h1 class="page-title">The scale of the problem</h1>
-      <p class="lede">India's waste-segregation gap isn't a minor inefficiency — it's a national-scale challenge with real environmental and public-health stakes. Here's the picture, from public government and industry data.</p>
+      <div class="reveal is-visible">
+        <p class="kicker">📊 UN SDG 12 Analytics</p>
+        <h1 class="page-title">The Scale of the Problem</h1>
+        <p class="lede">India's waste-segregation gap isn't a minor inconvenience — it is a national-scale ecological challenge with major public-health and climate implications. Explore national data and calculate your household's potential impact below.</p>
+      </div>
 
       <div class="stat-strip reveal">
         <div class="stat-card">
@@ -53,31 +73,61 @@
         </div>
         <div class="stat-card">
           <span class="num">$<span data-count-to="7.85" data-decimals="2" data-suffix="B">0</span></span>
-          <span class="label">Size of India's MSW management market, 2025</span>
+          <span class="label">Size of India's MSW management market by 2025</span>
         </div>
       </div>
+
+      <!-- Interactive Personal Impact Calculator -->
+      <section class="calculator-card reveal">
+        <div class="calculator-header">
+          <p class="kicker">🌱 Interactive Tool</p>
+          <h2 class="section-title" style="margin-bottom:6px;">Your Household Impact Calculator</h2>
+          <p style="color:var(--muted); max-width:54ch; margin:0 auto; font-size:14.5px;">See the tangible difference your family makes by segregating waste at the source every day.</p>
+        </div>
+
+        <div class="calculator-slider-row">
+          <span style="font-weight:600; font-size:14px; color:var(--ink);">Household Size:</span>
+          <input type="range" id="householdSlider" class="calc-slider" min="1" max="10" value="4" />
+          <span class="calc-badge-val" id="householdVal">4 People</span>
+        </div>
+
+        <div class="impact-metrics-row">
+          <div class="metric-box">
+            <div class="metric-val" id="calcDiverted">584 kg</div>
+            <div class="metric-title">Landfill Waste Diverted / year</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val" id="calcCo2">438 kg</div>
+            <div class="metric-title">CO₂e Emissions Avoided / year</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val" id="calcCompost">292 kg</div>
+            <div class="metric-title">Organic Compost Generated / year</div>
+          </div>
+        </div>
+      </section>
 
       <section class="section">
         <div class="section-head reveal">
           <div>
-            <p class="kicker">Composition</p>
-            <h2 class="section-title">What's actually in the waste stream</h2>
+            <p class="kicker">Composition &amp; Disparity</p>
+            <h2 class="section-title">What's in the waste stream</h2>
           </div>
         </div>
         <div class="chart-grid reveal">
           <div class="chart-card">
             <h3>Specialised waste streams (of 62 Mt/year)</h3>
-            <p class="chart-note">Hazardous, plastic, e-waste, and biomedical waste each need handling well beyond a regular bin.</p>
+            <p class="chart-note">Hazardous, plastic, e-waste, and biomedical waste each need handling well beyond standard dumpsites.</p>
             <canvas id="compositionChart" height="220"></canvas>
           </div>
           <div class="chart-card">
-            <h3>Source segregation: two Delhi bodies</h3>
-            <p class="chart-note">Same city, very different outcomes — showing how much segregation infrastructure and habits matter.</p>
+            <h3>Source segregation: Delhi municipal bodies</h3>
+            <p class="chart-note">Same metropolitan area, very different results — demonstrating how infrastructure and sorting habits determine success.</p>
             <canvas id="delhiChart" height="220"></canvas>
           </div>
         </div>
         <p class="source-note reveal">
-          Sources: Central Pollution Control Board (CPCB) national waste-generation figures; Delhi Pollution Control Committee (DPCC) Annual Report 2024–25 for New Delhi Municipal Council vs. Municipal Corporation of Delhi segregation rates; Mordor Intelligence, "India Municipal Solid Waste Management Market" (2025) for market size.
+          Sources: Central Pollution Control Board (CPCB) national waste-generation records; Delhi Pollution Control Committee (DPCC) Annual Reports; Mordor Intelligence, "India Municipal Solid Waste Management Market" (2025).
         </p>
       </section>
 
@@ -85,27 +135,30 @@
         <div class="section-head">
           <div>
             <p class="kicker">The Regulatory Shift</p>
-            <h2 class="section-title">Rules are catching up to the problem</h2>
+            <h2 class="section-title">Rules are catching up to the crisis</h2>
           </div>
         </div>
         <div class="feature-grid">
           <div class="feature-card">
+            <div class="icon">📜</div>
             <h3>Solid Waste Management Rules, 2026</h3>
-            <p>India's Ministry of Environment, Forest and Climate Change replaced the 2016 framework with rules mandating four-stream segregation (wet, dry, sanitary, hazardous) for every waste generator, effective April 2026.</p>
+            <p>India's Ministry of Environment, Forest and Climate Change framework mandates four-stream segregation (wet, dry, sanitary, hazardous) for every generator.</p>
           </div>
           <div class="feature-card">
+            <div class="icon">🏢</div>
             <h3>Bulk generator accountability</h3>
-            <p>Large residential complexes, hospitals, and campuses above set thresholds must now process organic waste on-site or obtain certification — shifting responsibility upstream, closer to where waste is created.</p>
+            <p>Apartment complexes, universities, hospitals, and tech parks must process organic waste on-site, shifting responsibility directly to generators.</p>
           </div>
           <div class="feature-card">
-            <h3>Where tools like this fit</h3>
-            <p>As accountability moves to individual generators, a fast, correct answer at the point of disposal becomes more valuable — that's the exact gap EcoSort AI is built to close.</p>
+            <div class="icon">🤖</div>
+            <h3>Where EcoSort AI fits</h3>
+            <p>Instant, AI-grounded advice removes guesswork at the bin so compliance is effortless and clean habits stick long-term.</p>
           </div>
         </div>
       </section>
 
       <footer class="page-footer">
-        Figures reflect the most recent publicly available reporting at the time of writing and are provided for context, not as real-time statistics.
+        Figures reflect publicly available environmental research and municipal reporting. EcoSort AI is dedicated to promoting SDG 12 (Responsible Consumption &amp; Production).
       </footer>
     </div>
   </main>

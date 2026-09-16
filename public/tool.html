@@ -3,14 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Try the Tool — EcoSort AI</title>
+<title>EcoSort AI — Smart Waste Advisor & Scanner</title>
 <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
-  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="topbar-right">
+    <button class="theme-toggle-btn" aria-label="Toggle theme" style="margin:0; padding:6px 10px;">
+      <span class="icon">🌙</span>
+    </button>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </div>
 <div class="overlay"></div>
 
@@ -19,11 +24,24 @@
     <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
     <nav>
       <a href="index.html"><span class="dot"></span>Home</a>
-      <a href="tool.html"><span class="dot"></span>Try the Tool</a>
+      <a href="tool.html" class="active"><span class="dot"></span>Try the Tool</a>
       <a href="impact.html"><span class="dot"></span>Impact &amp; Data</a>
       <a href="news.html"><span class="dot"></span>News</a>
       <a href="about.html"><span class="dot"></span>About</a>
     </nav>
+
+    <div class="streak-widget">
+      <div class="streak-icon">🔥</div>
+      <div class="streak-info">
+        <span class="streak-count streak-count-val">1 Day</span>
+        <span class="streak-label">Eco-Sorting Streak</span>
+      </div>
+    </div>
+
+    <button class="theme-toggle-btn">
+      <span class="icon">🌙</span> <span>Dark Mode</span>
+    </button>
+
     <div class="sidebar-footer">
       <strong>SDG 12</strong><br/>
       Responsible Consumption &amp; Production<br/><br/>
@@ -33,33 +51,149 @@
 
   <main class="main">
     <div class="page">
-      <p class="kicker">Try It</p>
-      <h1 class="page-title">What is this, and where does it go?</h1>
-      <p class="lede">Describe an item — in any words you'd naturally use — and get the right bin, the reasoning behind it, and one habit that helps it stick.</p>
-
-      <form class="tool-form" id="sortForm">
-        <textarea id="itemInput" rows="1" placeholder="e.g. a broken glass bottle and some vegetable peels" required></textarea>
-        <button class="btn btn-primary cursor-pointer" type="submit" id="submitBtn">Sort it</button>
-      </form>
-
-      <div class="chips" id="chips">
-        <span class="chip">used tea bags</span>
-        <span class="chip">an old phone charger</span>
-        <span class="chip">expired medicine strips</span>
-        <span class="chip">a pizza box with grease stains</span>
+      <div class="reveal is-visible">
+        <p class="kicker">✨ AI-Powered Waste Sorter</p>
+        <h1 class="page-title">Know Where It Goes</h1>
+        <p class="lede">Describe an item, upload/snap a photo, explore the municipal waste directory, or test your recycling knowledge in the Eco-Quiz.</p>
       </div>
 
-      <div class="state" id="loadingState">
-        <span class="dot-anim"></span><span class="dot-anim"></span><span class="dot-anim"></span>
-        <span>Retrieving local waste-segregation rules&hellip;</span>
+      <!-- Navigation Tabs -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="text-tab">💬 Text Advisor</button>
+        <button class="tab-btn" data-tab="camera-tab">📸 Camera &amp; Photo Scanner</button>
+        <button class="tab-btn" data-tab="directory-tab">📖 Waste Directory</button>
+        <button class="tab-btn" data-tab="quiz-tab">🏆 Eco-Quiz &amp; Badges</button>
       </div>
 
-      <div class="error-box" id="errorBox"></div>
+      <!-- Tab 1: Text Advisor -->
+      <div class="tab-pane active" id="text-tab">
+        <form class="tool-form" id="sortForm">
+          <textarea id="itemInput" rows="1" placeholder="e.g. greasy pizza box, broken glass bottle, old phone charger..." required></textarea>
+          <button class="btn btn-primary cursor-pointer" type="submit" id="submitBtn">Sort it &rarr;</button>
+        </form>
 
-      <div class="results" id="results"></div>
+        <div class="chips" id="chips">
+          <span class="chip">used tea bags</span>
+          <span class="chip">an old phone charger</span>
+          <span class="chip">expired medicine strips</span>
+          <span class="chip">a pizza box with grease stains</span>
+          <span class="chip">crushed soda can</span>
+          <span class="chip">broken glass bottle</span>
+          <span class="chip">used AA batteries</span>
+          <span class="chip">tetra pak juice box</span>
+        </div>
+
+        <div class="state" id="loadingState">
+          <span class="dot-anim"></span><span class="dot-anim"></span><span class="dot-anim"></span>
+          <span>Analyzing item &amp; retrieving municipal waste rules&hellip;</span>
+        </div>
+
+        <div class="error-box" id="errorBox"></div>
+
+        <div class="results" id="results"></div>
+      </div>
+
+      <!-- Tab 2: Camera & Photo Scanner -->
+      <div class="tab-pane" id="camera-tab">
+        <div class="scanner-dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+          <div class="scanner-icon">📷</div>
+          <h4>Drop an image here or take a photo</h4>
+          <p>Supports JPG, PNG, WEBP of packaging, waste items, and containers</p>
+          <div class="scanner-actions">
+            <button class="btn btn-primary cursor-pointer" id="uploadBtn" type="button">Choose Image</button>
+            <button class="btn btn-ghost cursor-pointer" id="webcamBtn" type="button">Use Live Camera</button>
+          </div>
+        </div>
+
+        <!-- Live Camera Stream -->
+        <div class="video-wrapper" id="videoWrapper">
+          <video id="webcamVideo" autoplay playsinline></video>
+          <div style="padding: 14px; background: var(--paper); display:flex; justify-content:center; gap: 12px;">
+            <button class="btn btn-primary cursor-pointer" id="snapBtn" type="button">📸 Capture Photo</button>
+            <button class="btn btn-ghost cursor-pointer" id="closeCameraBtn" type="button">Close Camera</button>
+          </div>
+        </div>
+
+        <!-- Image Preview & AI Detection Box -->
+        <div class="camera-preview-box" id="previewBox">
+          <img class="camera-preview-img" id="previewImg" src="" alt="Captured waste item" />
+          <div id="imageDetectionText" style="font-weight: 600; color: var(--forest); margin-bottom: 12px;">Scanning photo...</div>
+          <button class="btn btn-ghost cursor-pointer" id="clearImageBtn" type="button">Scan another item</button>
+        </div>
+
+        <div class="results" id="scannerResults" style="margin-top: 24px;"></div>
+      </div>
+
+      <!-- Tab 3: Waste Directory -->
+      <div class="tab-pane" id="directory-tab">
+        <div class="directory-controls">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="dirSearchInput" placeholder="Search 20+ items (e.g. coffee, foil, bulb, battery)..." />
+          </div>
+          <div class="filter-pills" id="filterPills">
+            <button class="pill-btn active" data-category="all">All Streams</button>
+            <button class="pill-btn" data-category="wet">🟢 Wet / Organic</button>
+            <button class="pill-btn" data-category="dry">🔵 Dry / Recyclable</button>
+            <button class="pill-btn" data-category="hazardous">🔴 Hazardous</button>
+            <button class="pill-btn" data-category="ewaste">🟣 E-Waste</button>
+          </div>
+        </div>
+
+        <div class="directory-grid" id="directoryGrid">
+          <!-- Loaded dynamically via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Tab 4: Eco-Quiz & Badges -->
+      <div class="tab-pane" id="quiz-tab">
+        <div class="quiz-container" id="quizContainer">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px;">
+            <span style="font-size:13px; font-weight:700; color:var(--moss);" id="quizRoundIndicator">Question 1 of 5</span>
+            <span style="font-size:13px; font-weight:700; color:var(--ink);" id="quizScoreCounter">Score: 0 / 5</span>
+          </div>
+          
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quizProgressFill"></div>
+          </div>
+
+          <h3 class="quiz-question" id="quizQuestionText">Loading question...</h3>
+          <div class="quiz-options" id="quizOptionsContainer"></div>
+
+          <div class="quiz-explanation" id="quizExplanation"></div>
+
+          <button class="btn btn-primary cursor-pointer" id="nextQuestionBtn" style="display:none; width:100%;">Next Question &rarr;</button>
+        </div>
+
+        <!-- Badges Showcase -->
+        <h3 style="font-family:'Fraunces',serif; margin: 40px 0 16px; font-size: 22px;">Your Eco-Badges</h3>
+        <div class="badge-grid">
+          <div class="badge-card unlocked" id="badgeStarter">
+            <div class="badge-icon">🌱</div>
+            <h4>Eco-Novice</h4>
+            <p>Started your waste sorting journey</p>
+          </div>
+          <div class="badge-card" id="badgeCompost">
+            <div class="badge-icon">🍃</div>
+            <h4>Compost Master</h4>
+            <p>Score 100% on organic waste questions</p>
+          </div>
+          <div class="badge-card" id="badgeHazard">
+            <div class="badge-icon">🛡️</div>
+            <h4>Hazard Hero</h4>
+            <p>Safely identify toxic and chemical waste</p>
+          </div>
+          <div class="badge-card" id="badgeZeroWaste">
+            <div class="badge-icon">👑</div>
+            <h4>Zero-Waste Champion</h4>
+            <p>Complete the Eco-Quiz with a perfect score</p>
+          </div>
+        </div>
+      </div>
 
       <footer class="page-footer">
-        A lightweight retrieval step grounds every answer in a local waste-rules knowledge base before the model responds. Categories follow common Indian municipal solid-waste guidelines (wet / dry / hazardous / e-waste) — always defer to your local municipal rules for anything ambiguous.
+        A lightweight retrieval step grounds every answer in a municipal waste-rules knowledge base. Categories align with standard solid-waste segregation directives (Wet / Dry / Hazardous / E-Waste) supporting UN SDG 12.
       </footer>
     </div>
   </main>

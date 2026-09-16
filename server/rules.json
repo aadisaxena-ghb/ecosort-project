@@ -2,97 +2,153 @@
   {
     "id": "wet-food",
     "category": "wet",
-    "bin_name": "Wet / Organic bin",
-    "keywords": ["food", "peel", "peels", "leftover", "leftovers", "scraps", "vegetable", "fruit", "rice", "curry", "egg shell", "eggshell", "bones", "spoiled", "rotten"],
-    "guidance": "Food scraps and leftovers are biodegradable and belong in the wet/organic bin, where they can be composted rather than sent to landfill.",
-    "tip": "Keep a small lidded bin near the kitchen counter so wet waste never mixes with dry waste at the source."
+    "bin_name": "Wet / Organic bin (Green)",
+    "keywords": ["food", "peel", "peels", "leftover", "leftovers", "scraps", "vegetable", "fruit", "rice", "curry", "egg shell", "eggshell", "bones", "spoiled", "rotten", "meat", "bread", "banana peel", "apple core"],
+    "guidance": "Food scraps and leftovers are biodegradable and belong in the wet/organic bin, where they can be composted into nutrient-rich soil rather than generating methane in landfills.",
+    "tip": "Keep a small lidded bin near the kitchen counter so organic scraps never mix with dry recyclables at the source."
   },
   {
     "id": "wet-garden",
     "category": "wet",
-    "bin_name": "Wet / Organic bin",
-    "keywords": ["garden", "leaves", "grass", "clippings", "flowers", "plant", "compost"],
-    "guidance": "Garden and plant waste is organic and compostable, and should go with wet waste rather than general dry trash.",
-    "tip": "Dry, brown garden waste (like dead leaves) composts faster when mixed with a little wet, green waste."
+    "bin_name": "Wet / Organic bin (Green)",
+    "keywords": ["garden", "leaves", "grass", "clippings", "flowers", "plant", "compost", "twigs", "soil", "wilted bouquet"],
+    "guidance": "Garden clippings, dry leaves, and cut flowers are organic and compostable, and belong in the wet/organic waste stream.",
+    "tip": "Mix dry brown leaves with wet green clippings to accelerate natural aerobic composting."
   },
   {
     "id": "wet-tea-coffee",
     "category": "wet",
-    "bin_name": "Wet / Organic bin",
-    "keywords": ["tea", "tea bag", "teabag", "coffee", "grounds", "coffee grounds"],
-    "guidance": "Used tea bags and coffee grounds are organic matter and belong in the wet/organic bin; most are compostable.",
-    "tip": "Check if the tea bag has a plastic mesh or seal — remove that part (dry waste) before composting the rest."
+    "bin_name": "Wet / Organic bin (Green)",
+    "keywords": ["tea", "tea bag", "teabag", "coffee", "grounds", "coffee grounds", "used tea leaves"],
+    "guidance": "Used tea leaves and coffee grounds are organic matter and belong in the wet bin; they provide nitrogen-rich nutrients for compost.",
+    "tip": "Check if the tea bag has a plastic staple or synthetic mesh — snip off the tag and staple before composting the rest."
   },
   {
     "id": "wet-soiled-paper",
     "category": "wet",
-    "bin_name": "Wet / Organic bin",
-    "keywords": ["pizza box", "greasy", "grease", "oil stained", "soiled paper", "napkin", "tissue", "used tissue"],
-    "guidance": "Paper that is heavily soiled with food or oil (like the base of a greasy pizza box) cannot be recycled and should go with wet/organic waste, not dry recyclables.",
-    "tip": "Tear off and recycle any clean, unstained part of the box separately — only the greasy section goes with wet waste."
+    "bin_name": "Wet / Organic bin (Green)",
+    "keywords": ["pizza box", "greasy", "grease", "oil stained", "soiled paper", "napkin", "tissue", "used tissue", "paper towel", "food wrapper greasy"],
+    "guidance": "Paper that is heavily stained with food grease, oils, or bodily fluids cannot be recycled at paper mills and belongs in wet/compost waste.",
+    "tip": "Tear off the clean lid of the pizza box for dry recycling, and put only the greasy bottom base in the wet bin."
+  },
+  {
+    "id": "wet-cooking-oil",
+    "category": "wet",
+    "bin_name": "Organic / Bio-drain Collection",
+    "keywords": ["cooking oil", "used oil", "grease", "frying oil", "ghee", "fat"],
+    "guidance": "Never pour cooking oil or melted fat down kitchen sinks. Small amounts can be absorbed in food scraps or collected for biodiesel recycling.",
+    "tip": "Pour cooled oil into a sealed jar or soak it into cardboard/newspaper scraps before composting or specialized recycling."
   },
   {
     "id": "dry-paper-cardboard",
     "category": "dry",
-    "bin_name": "Dry / Recyclable bin",
-    "keywords": ["paper", "cardboard", "newspaper", "magazine", "carton", "box"],
-    "guidance": "Clean paper and cardboard are recyclable and belong in the dry waste bin.",
-    "tip": "Flatten boxes before disposal — it saves space and makes sorting at collection centres faster."
+    "bin_name": "Dry / Recyclable bin (Blue)",
+    "keywords": ["paper", "cardboard", "newspaper", "magazine", "carton", "box", "envelope", "notebook", "pamphlet", "receipt", "shredded paper"],
+    "guidance": "Clean, dry paper, cardboard packaging, and newspapers are highly recyclable and belong in the dry waste bin.",
+    "tip": "Flatten boxes and remove plastic packing tape to maximize recycling capacity at sorting facilities."
   },
   {
     "id": "dry-glass",
     "category": "dry",
-    "bin_name": "Dry / Recyclable bin",
-    "keywords": ["glass", "bottle", "jar", "broken glass", "shattered glass"],
-    "guidance": "Glass bottles and jars are recyclable dry waste. If broken, the glass is still recyclable but poses a cut risk during handling.",
-    "tip": "Wrap broken glass in newspaper or a sealed pouch labelled 'glass' before placing it in the dry bin, so it's handled safely."
+    "bin_name": "Dry / Recyclable bin (Blue)",
+    "keywords": ["glass", "bottle", "jar", "broken glass", "shattered glass", "wine bottle", "beer bottle", "glass container"],
+    "guidance": "Glass bottles and jars are 100% endlessly recyclable dry waste. If broken, it remains recyclable but requires safe wrapping.",
+    "tip": "Wrap broken glass securely in thick newspaper and write 'BROKEN GLASS' so sanitation workers avoid injury."
   },
   {
-    "id": "dry-plastic-metal",
+    "id": "dry-plastic-containers",
     "category": "dry",
-    "bin_name": "Dry / Recyclable bin",
-    "keywords": ["plastic", "bottle cap", "wrapper", "packet", "metal", "can", "tin", "aluminium", "aluminum", "foil"],
-    "guidance": "Clean plastic, metal cans, and foil are recyclable and belong in the dry waste bin.",
-    "tip": "Give containers a quick rinse — food residue can get an entire batch of recyclables rejected at the sorting facility."
+    "bin_name": "Dry / Recyclable bin (Blue)",
+    "keywords": ["plastic", "plastic bottle", "water bottle", "shampoo bottle", "detergent bottle", "bottle cap", "plastic container", "tupperware"],
+    "guidance": "Rigid plastic bottles, jugs, and containers (PET #1, HDPE #2, PP #5) are recyclable dry waste.",
+    "tip": "Empty and give containers a quick water rinse — food residue can spoil an entire bin batch at the recycler."
+  },
+  {
+    "id": "dry-metal-cans",
+    "category": "dry",
+    "bin_name": "Dry / Recyclable bin (Blue)",
+    "keywords": ["metal", "can", "tin", "aluminium", "aluminum", "foil", "soda can", "tin can", "foil tray", "metal cap", "wire hanger"],
+    "guidance": "Aluminum cans, tin food cans, and clean aluminum foil are infinitely recyclable metals that save 95% energy compared to raw mining.",
+    "tip": "Scrunch clean foil into a ball (at least golf-ball sized) so automated sorting machinery doesn't blow it away."
+  },
+  {
+    "id": "dry-tetra-pak",
+    "category": "dry",
+    "bin_name": "Dry / Recyclable bin (Blue)",
+    "keywords": ["tetra pak", "milk carton", "juice box", "aseptic carton", "juice carton", "beverage carton"],
+    "guidance": "Tetra Paks contain paperboard, polyethylene, and aluminum layers that are recyclable at dedicated hydrapulping mills.",
+    "tip": "Flatten the carton and push the straw or screw the cap back inside so all pieces are processed together."
+  },
+  {
+    "id": "dry-flexible-plastic",
+    "category": "dry",
+    "bin_name": "Dry / Recyclable bin (Blue)",
+    "keywords": ["plastic bag", "polythene", "grocery bag", "bubble wrap", "film", "cling wrap", "zip lock"],
+    "guidance": "Soft flexible plastic bags and LDPE film can be recycled, though many municipal curbside programs prefer collection at grocery drop-off bins.",
+    "tip": "Gather multiple plastic bags together and stuff them inside one bag before dry disposal."
+  },
+  {
+    "id": "dry-clothes-textiles",
+    "category": "dry",
+    "bin_name": "Dry / Textile Donation (Blue/Donation)",
+    "keywords": ["clothes", "clothing", "shirt", "trousers", "fabric", "textile", "curtain", "towel", "shoes", "bedsheet"],
+    "guidance": "Clean textiles and wearable garments should be donated or sent to fabric shredding/upcycling channels rather than landfills.",
+    "tip": "Donate gently used clothing to charities or repurpose old cotton shirts into reusable household cleaning rags."
   },
   {
     "id": "hazard-battery",
     "category": "hazardous",
-    "bin_name": "Hazardous waste collection",
-    "keywords": ["battery", "batteries", "power bank"],
-    "guidance": "Batteries contain heavy metals and chemicals that can leach into soil and water. They must never go in regular bins.",
-    "tip": "Look for a designated battery drop-box at electronics stores or your municipal hazardous-waste collection point."
+    "bin_name": "Hazardous Waste Collection (Red/Black)",
+    "keywords": ["battery", "batteries", "aa battery", "aaa battery", "lithium", "rechargeable battery", "power bank", "button cell", "car battery"],
+    "guidance": "Batteries contain corrosive acids and toxic heavy metals (lead, cadmium, lithium) that cause severe soil and groundwater contamination.",
+    "tip": "Tape over battery terminals with clear tape to prevent short circuits and drop them at designated collection points."
   },
   {
     "id": "hazard-medicine",
     "category": "hazardous",
-    "bin_name": "Hazardous waste collection",
-    "keywords": ["medicine", "medicines", "tablet", "tablets", "expired medicine", "syringe", "pharmaceutical"],
-    "guidance": "Expired or unused medicines can contaminate water supplies if thrown in regular trash and should be treated as hazardous waste.",
-    "tip": "Many pharmacies accept expired medicines for safe disposal — ask before throwing them out at home."
+    "bin_name": "Hazardous / Biomedical Collection (Red/Yellow)",
+    "keywords": ["medicine", "medicines", "tablet", "tablets", "expired medicine", "syringe", "needle", "pharmaceutical", "ointment", "syrup", "blister pack"],
+    "guidance": "Expired drugs and blister packs can contaminate water treatment systems and encourage antimicrobial resistance if thrown in regular trash.",
+    "tip": "Return unused/expired medicines to take-back boxes at participating pharmacies and local clinics."
   },
   {
     "id": "hazard-chemical",
     "category": "hazardous",
-    "bin_name": "Hazardous waste collection",
-    "keywords": ["paint", "chemical", "pesticide", "cleaning fluid", "solvent", "nail polish", "aerosol"],
-    "guidance": "Paints, chemicals, and aerosols are hazardous and can be flammable or toxic; they require specialised disposal, not regular bins.",
-    "tip": "Let paint cans dry out completely before disposal where required by your local guidelines — check before doing this."
+    "bin_name": "Hazardous Waste Collection (Red/Black)",
+    "keywords": ["paint", "chemical", "pesticide", "cleaning fluid", "solvent", "nail polish", "aerosol", "spray can", "bleach", "varnish", "thinner", "insecticide"],
+    "guidance": "Chemical solvents, paints, pesticides, and pressurized aerosol cans are flammable, toxic, and hazardous.",
+    "tip": "Never puncture aerosol cans. Use the entire product up or take half-full cans to local household hazardous waste centers."
   },
   {
     "id": "hazard-sanitary",
     "category": "hazardous",
-    "bin_name": "Hazardous waste collection",
-    "keywords": ["sanitary", "pad", "diaper", "nappy", "mask", "used mask"],
-    "guidance": "Sanitary and personal hygiene waste should be wrapped separately and treated as hazardous/biomedical waste, not mixed with recyclables.",
-    "tip": "Wrap sanitary waste in paper (not plastic) before disposal, as many municipalities specifically request this."
+    "bin_name": "Hazardous / Sanitary Waste (Red/Yellow)",
+    "keywords": ["sanitary", "pad", "diaper", "nappy", "mask", "used mask", "bandage", "gauze", "cotton swab", "tampon", "condom", "medical gloves"],
+    "guidance": "Sanitary hygiene products and medical dressings contain biological materials and must be wrapped separately for sanitary incineration.",
+    "tip": "Wrap sanitary waste securely in newspaper and mark with a red dot or label before putting in sanitary disposal."
+  },
+  {
+    "id": "hazard-fluorescent-bulb",
+    "category": "hazardous",
+    "bin_name": "Hazardous Waste Collection (Red/Special)",
+    "keywords": ["tube light", "cfl", "fluorescent bulb", "mercury", "thermometer"],
+    "guidance": "CFL bulbs and fluorescent tubes contain mercury vapor, which is a neurotoxin. They must not be smashed or put in standard bins.",
+    "tip": "Store intact in original packaging or bubble wrap until you can drop it at a specialized hazardous waste depot."
   },
   {
     "id": "ewaste-device",
     "category": "ewaste",
-    "bin_name": "E-Waste collection",
-    "keywords": ["phone", "charger", "cable", "laptop", "computer", "electronics", "bulb", "led", "wire", "adapter", "headphone", "earphone"],
-    "guidance": "Electronic devices and accessories contain metals and components that need specialised e-waste recycling, not regular dry waste.",
-    "tip": "Most brands and electronics retailers run e-waste take-back programs — check before assuming it has to go in the trash."
+    "bin_name": "E-Waste Collection (Grey/Purple)",
+    "keywords": ["phone", "charger", "cable", "laptop", "computer", "electronics", "bulb", "led", "wire", "adapter", "headphone", "earphone", "mouse", "keyboard", "printer", "tablet", "screen", "monitor", "smartwatch"],
+    "guidance": "Electronics and electrical accessories contain precious metals (gold, copper) alongside hazardous flame retardants and must go to certified e-waste recyclers.",
+    "tip": "Look for electronics take-back bins at major retailers or municipal e-waste drive drop-offs."
+  },
+  {
+    "id": "ewaste-appliances",
+    "category": "ewaste",
+    "bin_name": "E-Waste / Large Appliance Collection",
+    "keywords": ["microwave", "toaster", "kettle", "hair dryer", "refrigerator", "fan", "blender", "mixer", "iron box", "vacuum cleaner"],
+    "guidance": "Small and large broken household electrical appliances are classified as e-waste and contain recyclable copper coils and steel casing.",
+    "tip": "Check if local appliance dealers offer exchange discounts when purchasing a replacement unit."
   }
 ]

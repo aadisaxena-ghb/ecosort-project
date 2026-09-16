@@ -10,7 +10,12 @@
 
 <div class="topbar">
   <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
-  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="topbar-right">
+    <button class="theme-toggle-btn" aria-label="Toggle theme" style="margin:0; padding:6px 10px;">
+      <span class="icon">🌙</span>
+    </button>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </div>
 <div class="overlay"></div>
 
@@ -21,9 +26,22 @@
       <a href="index.html"><span class="dot"></span>Home</a>
       <a href="tool.html"><span class="dot"></span>Try the Tool</a>
       <a href="impact.html"><span class="dot"></span>Impact &amp; Data</a>
-      <a href="news.html"><span class="dot"></span>News</a>
+      <a href="news.html" class="active"><span class="dot"></span>News</a>
       <a href="about.html"><span class="dot"></span>About</a>
     </nav>
+
+    <div class="streak-widget">
+      <div class="streak-icon">🔥</div>
+      <div class="streak-info">
+        <span class="streak-count streak-count-val">1 Day</span>
+        <span class="streak-label">Eco-Sorting Streak</span>
+      </div>
+    </div>
+
+    <button class="theme-toggle-btn">
+      <span class="icon">🌙</span> <span>Dark Mode</span>
+    </button>
+
     <div class="sidebar-footer">
       <strong>SDG 12</strong><br/>
       Responsible Consumption &amp; Production<br/><br/>
@@ -33,9 +51,11 @@
 
   <main class="main">
     <div class="page">
-      <p class="kicker">Staying Current</p>
-      <h1 class="page-title">What's happening in waste management</h1>
-      <p class="lede">A few recent developments in India's waste and sustainability landscape, for context on why source-level segregation is becoming more important, not less.</p>
+      <div class="reveal is-visible">
+        <p class="kicker">📰 Staying Current</p>
+        <h1 class="page-title">Waste &amp; Circular Economy News</h1>
+        <p class="lede">Recent developments in India's waste and sustainability landscape, highlighting why source segregation and responsible recycling are critical.</p>
+      </div>
 
       <div class="news-list">
 
@@ -52,7 +72,7 @@
           <div>
             <div class="meta">Regulation</div>
             <h3>On-site composting becomes mandatory for bulk generators</h3>
-            <p>Large campuses, hospitals, and complexes crossing set thresholds must now process organic waste on-site or obtain third-party certification.</p>
+            <p>Large campuses, hospitals, and residential complexes crossing set thresholds must now process organic waste on-site or obtain third-party certification.</p>
           </div>
           <span class="arrow">&rarr;</span>
         </a>
@@ -61,7 +81,7 @@
           <div>
             <div class="meta">Circular Economy</div>
             <h3>Government pushes recycling infrastructure at global forum</h3>
-            <p>At the 10th World Circular Economy Forum, India's environment minister emphasised expanding recycling markets and extended producer responsibility.</p>
+            <p>At the 10th World Circular Economy Forum, India's environment ministry emphasised expanding recycling markets and extended producer responsibility.</p>
           </div>
           <span class="arrow">&rarr;</span>
         </a>
@@ -87,7 +107,7 @@
       </div>
 
       <footer class="page-footer">
-        Headlines are paraphrased summaries linking to their original sources — click through to read the full articles. This page is a static, hand-curated list, not a live news feed.
+        Headlines are paraphrased summaries linking to their original sources — click through to read the full articles.
       </footer>
     </div>
   </main>

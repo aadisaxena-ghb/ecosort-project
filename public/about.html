@@ -10,7 +10,12 @@
 
 <div class="topbar">
   <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
-  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="topbar-right">
+    <button class="theme-toggle-btn" aria-label="Toggle theme" style="margin:0; padding:6px 10px;">
+      <span class="icon">🌙</span>
+    </button>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </div>
 <div class="overlay"></div>
 
@@ -22,8 +27,21 @@
       <a href="tool.html"><span class="dot"></span>Try the Tool</a>
       <a href="impact.html"><span class="dot"></span>Impact &amp; Data</a>
       <a href="news.html"><span class="dot"></span>News</a>
-      <a href="about.html"><span class="dot"></span>About</a>
+      <a href="about.html" class="active"><span class="dot"></span>About</a>
     </nav>
+
+    <div class="streak-widget">
+      <div class="streak-icon">🔥</div>
+      <div class="streak-info">
+        <span class="streak-count streak-count-val">1 Day</span>
+        <span class="streak-label">Eco-Sorting Streak</span>
+      </div>
+    </div>
+
+    <button class="theme-toggle-btn">
+      <span class="icon">🌙</span> <span>Dark Mode</span>
+    </button>
+
     <div class="sidebar-footer">
       <strong>SDG 12</strong><br/>
       Responsible Consumption &amp; Production<br/><br/>
@@ -33,9 +51,11 @@
 
   <main class="main">
     <div class="page">
-      <p class="kicker">About the Project</p>
-      <h1 class="page-title">Why EcoSort AI exists</h1>
-      <p class="lede">Most people don't mismanage waste on purpose — they just lack a fast, reliable way to check where an unusual item belongs. EcoSort AI is built to close exactly that gap, at the moment it matters: right before something gets thrown away.</p>
+      <div class="reveal is-visible">
+        <p class="kicker">About the Project</p>
+        <h1 class="page-title">Why EcoSort AI Exists</h1>
+        <p class="lede">Most people don't mismanage waste on purpose — they just lack an instant, reliable way to check where an unusual item belongs. EcoSort AI closes that gap at the exact moment it matters: right before something is discarded.</p>
+      </div>
 
       <div class="profile-card reveal">
         <div class="avatar">AS</div>
@@ -48,26 +68,26 @@
       <section class="section">
         <div class="section-head reveal">
           <div>
-            <p class="kicker">Principles</p>
+            <p class="kicker">Guiding Principles</p>
             <h2 class="section-title">Responsible AI, by design</h2>
           </div>
         </div>
         <div class="about-grid reveal">
           <div class="value-card">
-            <h3>Fairness</h3>
-            <p>The retriever matches on plain-language keywords rather than one fixed vocabulary, so varied ways of describing the same item still get the right guidance.</p>
+            <h3>⚖️ Fairness</h3>
+            <p>The retriever matches plain-language phrasing and slang rather than rigid taxonomy, so varied user descriptions receive accurate guidance.</p>
           </div>
           <div class="value-card">
-            <h3>Transparency</h3>
-            <p>Every answer explains the reasoning behind it, referencing the retrieved rule — never an unexplained verdict.</p>
+            <h3>🔍 Transparency</h3>
+            <p>Every answer provides clear reasoning referencing the underlying rule, preventing unexplained "black box" decisions.</p>
           </div>
           <div class="value-card">
-            <h3>Ethics</h3>
-            <p>Positioned as a guidance tool for everyday items, not a substitute for professional handling of hazardous, medical, or biomedical waste.</p>
+            <h3>🛡️ Safety &amp; Ethics</h3>
+            <p>Identifies toxic, hazardous, and electronic waste explicitly to protect sanitation workers and ecosystems from chemical exposure.</p>
           </div>
           <div class="value-card">
-            <h3>Privacy</h3>
-            <p>Only the item description is ever sent to the model. No personal data is collected, stored, or required to use the tool.</p>
+            <h3>🔒 Privacy First</h3>
+            <p>Only the item description or image is analyzed. No personal data is stored, tracked, or sold.</p>
           </div>
         </div>
       </section>
@@ -75,28 +95,31 @@
       <section class="section reveal">
         <div class="section-head">
           <div>
-            <p class="kicker">Alignment</p>
-            <h2 class="section-title">SDG 12 &amp; SDG 11</h2>
+            <p class="kicker">Global Alignment</p>
+            <h2 class="section-title">UN Sustainable Development Goals</h2>
           </div>
         </div>
         <div class="feature-grid">
           <div class="feature-card">
-            <h3>SDG 12 — Primary</h3>
-            <p>Responsible Consumption and Production. Correct segregation at source is one of the most direct ways an individual action supports this goal at scale.</p>
+            <div class="icon">🔄</div>
+            <h3>SDG 12 — Responsible Consumption</h3>
+            <p>Segregation at source is the foundational step for circular recycling and closed-loop material recovery.</p>
           </div>
           <div class="feature-card">
-            <h3>SDG 11 — Secondary</h3>
-            <p>Sustainable Cities and Communities. Better source segregation reduces the load on municipal collection and processing systems city-wide.</p>
+            <div class="icon">🏙️</div>
+            <h3>SDG 11 — Sustainable Cities</h3>
+            <p>Efficient source separation reduces unmanaged dump heaps and lowers municipal waste processing costs.</p>
           </div>
           <div class="feature-card">
-            <h3>Built for the 1M1B Internship</h3>
-            <p>Developed as the final project for the 1M1B AI for Sustainability Virtual Internship, run in collaboration with IBM SkillsBuild and AICTE.</p>
+            <div class="icon">🎓</div>
+            <h3>1M1B Sustainability Initiative</h3>
+            <p>Developed as a capstone project for the 1M1B AI for Sustainability Internship in collaboration with IBM SkillsBuild.</p>
           </div>
         </div>
       </section>
 
       <footer class="page-footer">
-        Have feedback or a rules dataset for your own city or campus? The knowledge base is a single, swappable JSON file — see the project README for details.
+        Have feedback or a rules dataset for your campus or municipality? The knowledge base is fully open and modular — see the GitHub repository for details.
       </footer>
     </div>
   </main>
