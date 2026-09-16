@@ -82,23 +82,17 @@
 
           </div>
 
-          <div class="hero-art reveal is-visible card-tilt">
-            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="200" cy="200" r="170" fill="var(--bg-alt)"/>
-              <circle cx="200" cy="200" r="128" fill="var(--paper)"/>
-              <g>
-                <rect x="120" y="150" width="60" height="90" rx="10" fill="var(--wet)"/>
-                <rect x="128" y="132" width="44" height="20" rx="6" fill="var(--wet)"/>
-                <rect x="220" y="130" width="60" height="110" rx="10" fill="var(--dry)"/>
-                <rect x="228" y="112" width="44" height="20" rx="6" fill="var(--dry)"/>
-                <circle cx="150" cy="195" r="9" fill="#EAF1E5"/>
-                <circle cx="150" cy="215" r="9" fill="#EAF1E5"/>
-                <rect x="240" y="150" width="20" height="60" rx="4" fill="#EAF1E5"/>
-              </g>
-              <path d="M90 300 Q200 340 310 300" stroke="var(--moss-light)" stroke-width="6" fill="none" stroke-linecap="round"/>
-              <circle cx="95" cy="120" r="10" fill="var(--amber)" opacity="0.85"/>
-              <circle cx="305" cy="90" r="7" fill="var(--moss)" opacity="0.85"/>
-            </svg>
+          <div class="hero-art reveal is-visible">
+            <div class="hero-art-glass card-tilt">
+              <img src="images/hero-art.jpg" alt="EcoSort AI 3D Smart Waste Sorting Ecosystem" />
+              <div class="hero-badge-float">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:16px;">🌱</span>
+                  <span style="font-weight:700; font-size:13px; color:#fff;">Circular AI Ecosystem</span>
+                </div>
+                <span class="badge-tag">98% Diversion</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -116,6 +110,33 @@
           <span class="marquee-item"><span class="badge">Policy 2026</span> 4-stream source segregation is mandatory for all waste generators.</span>
         </div>
       </div>
+
+      <!-- Interactive 3-Step Journey Timeline -->
+      <section class="timeline-journey reveal">
+        <div class="section-head" style="margin-bottom:28px;">
+          <div>
+            <p class="kicker">Dynamic 3-Step Journey</p>
+            <h2 class="section-title">How EcoSort AI transforms waste in seconds</h2>
+          </div>
+        </div>
+        <div class="timeline-grid">
+          <div class="timeline-card card-tilt reveal">
+            <div class="timeline-step-num">1</div>
+            <h4>Input or Snap</h4>
+            <p>Type any tricky household item, drag &amp; drop an image, or use the live camera scanner for complex multi-material packaging.</p>
+          </div>
+          <div class="timeline-card card-tilt reveal">
+            <div class="timeline-step-num">2</div>
+            <h4>Grounded AI Reasoning</h4>
+            <p>Our local RAG engine matches municipal rules with Google Gemini AI to eliminate hallucinations and give exact bin placement.</p>
+          </div>
+          <div class="timeline-card card-tilt reveal">
+            <div class="timeline-step-num">3</div>
+            <h4>Take Action &amp; Track Impact</h4>
+            <p>Receive preparation tips (rinse, peel, squash), earn streak points, and calculate your household's real carbon diversion.</p>
+          </div>
+        </div>
+      </section>
 
       <!-- Interactive Drag & Drop Bin Toss Mini-Game -->
       <section class="bin-playground reveal" id="binPlayground">

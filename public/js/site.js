@@ -546,3 +546,77 @@ window.playChime = function(type = 'success'){
     if(href === current) a.classList.add('active');
   });
 })();
+
+// ---------- 15. Dynamic Scroll Engine (Progress Bar, Parallax & Percentage Pill) ----------
+(function initScrollDynamics(){
+  // Ensure top progress bar exists
+  let progressBar = document.getElementById('scrollProgressBar');
+  if(!progressBar){
+    progressBar = document.createElement('div');
+    progressBar.id = 'scrollProgressBar';
+    document.body.prepend(progressBar);
+  }
+
+  // Ensure scroll percentage pill exists
+  let scrollPill = document.getElementById('scrollPill');
+  if(!scrollPill){
+    scrollPill = document.createElement('div');
+    scrollPill.className = 'scroll-pill';
+    scrollPill.id = 'scrollPill';
+    scrollPill.innerHTML = `<span>↑</span><span id="scrollPercent">0%</span>`;
+    document.body.appendChild(scrollPill);
+  }
+
+  const percentLabel = document.getElementById('scrollPercent');
+
+  // Smooth scroll to top on pill click
+  scrollPill.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.playChime?.('click');
+  });
+
+  const heroBlobs = document.querySelectorAll('.blob');
+  let ticking = false;
+
+  function onScroll(){
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    // 1. Update top gradient progress bar
+    if(progressBar){
+      progressBar.style.width = `${Math.min(100, Math.max(0, scrollPercent))}%`;
+    }
+
+    // 2. Update floating scroll pill & visibility
+    if(scrollPill){
+      if(scrollTop > 220){
+        scrollPill.classList.add('visible');
+        if(percentLabel) percentLabel.textContent = `${Math.round(scrollPercent)}%`;
+      } else {
+        scrollPill.classList.remove('visible');
+      }
+    }
+
+    // 3. Subtle Parallax effect on hero blobs
+    if(heroBlobs.length && scrollTop < 800){
+      heroBlobs.forEach((blob, idx) => {
+        const factor = idx === 0 ? 0.18 : -0.14;
+        blob.style.transform = `translateY(${scrollTop * factor}px)`;
+      });
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if(!ticking){
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial calculation
+  onScroll();
+})();
+

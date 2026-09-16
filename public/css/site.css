@@ -1186,24 +1186,186 @@ footer.page-footer{
 }
 [data-theme="dark"] .feedback-bubble{ color: var(--moss); }
 
-/* ---------- Interactive Persona Check Widget ---------- */
-.persona-card{
-  background: linear-gradient(135deg, var(--paper-translucent), var(--bg-alt));
+/* ---------- Scroll-Driven Visual Dynamics ---------- */
+#scrollProgressBar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  background: linear-gradient(90deg, var(--moss), var(--amber), var(--dry), var(--ewaste));
+  width: 0%;
+  z-index: 9999999;
+  transition: width 0.1s ease-out;
+}
+
+/* Top Scroll Progress Bar */
+#scrollProgressBar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--moss), var(--amber), var(--wet), #42A5F5);
+  z-index: 99999;
+  box-shadow: 0 0 10px rgba(94, 139, 62, 0.6);
+  transition: width 0.08s linear;
+}
+
+/* Floating Back-to-Top / Scroll Progress Pill */
+.scroll-pill{
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--paper-translucent);
+  backdrop-filter: blur(14px);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 26px;
-  margin-top: 36px;
-  box-shadow: var(--shadow-sm);
+  color: var(--ink);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  z-index: 900;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-pill.visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.scroll-pill:hover{
+  border-color: var(--moss);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Hero Glass Artwork Showcase */
+.hero-art-glass{
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  background: var(--paper-translucent);
+  backdrop-filter: blur(16px);
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: floatHero 6s infinite alternate ease-in-out;
+}
+@keyframes floatHero{
+  0%{ transform: translateY(0px) rotate(0deg); }
+  100%{ transform: translateY(-10px) rotate(0.5deg); }
+}
+.hero-art-glass img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 22px;
+  transition: transform 0.4s ease;
+}
+.hero-art-glass:hover img{
+  transform: scale(1.03);
+}
+.hero-badge-float{
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(18, 36, 26, 0.85);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 14px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.hero-badge-float .badge-tag{
+  background: var(--moss);
+  color: #090E0B;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+/* ---------- Interactive 3-Step Journey Timeline ---------- */
+.timeline-journey{
+  position: relative;
+  margin: 50px 0;
+}
+.timeline-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  flex-wrap: wrap;
+  position: relative;
 }
-.persona-badge-glow{
-  font-size: 42px;
-  animation: pulseGlow 2s infinite ease-in-out;
+@media (max-width: 820px){ .timeline-grid{ grid-template-columns: 1fr; } }
+.timeline-card{
+  background: var(--paper-translucent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 22px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-@keyframes pulseGlow{ 0%, 100%{ transform: scale(1); filter: drop-shadow(0 0 8px rgba(94, 139, 62, 0.3)); } 50%{ transform: scale(1.1); filter: drop-shadow(0 0 16px rgba(94, 139, 62, 0.6)); } }
+.timeline-card:hover{
+  transform: translateY(-6px);
+  border-color: var(--moss);
+  box-shadow: var(--shadow-lg);
+}
+.timeline-step-num{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--forest);
+  border: 1.5px solid var(--moss);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .timeline-step-num{ color: var(--moss); }
+.timeline-card h4{
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.timeline-card p{
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Enhanced Scroll Reveal Transitions */
+.reveal{
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  filter: blur(4px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
 
 
