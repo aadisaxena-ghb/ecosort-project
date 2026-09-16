@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Try the Tool — EcoSort AI</title>
+<link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div>
+<div class="overlay"></div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="mark"></span><span>EcoSort AI</span></div>
+    <nav>
+      <a href="index.html"><span class="dot"></span>Home</a>
+      <a href="tool.html"><span class="dot"></span>Try the Tool</a>
+      <a href="impact.html"><span class="dot"></span>Impact &amp; Data</a>
+      <a href="news.html"><span class="dot"></span>News</a>
+      <a href="about.html"><span class="dot"></span>About</a>
+    </nav>
+    <div class="sidebar-footer">
+      <strong>SDG 12</strong><br/>
+      Responsible Consumption &amp; Production<br/><br/>
+      1M1B AI for Sustainability Virtual Internship
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page">
+      <p class="kicker">Try It</p>
+      <h1 class="page-title">What is this, and where does it go?</h1>
+      <p class="lede">Describe an item — in any words you'd naturally use — and get the right bin, the reasoning behind it, and one habit that helps it stick.</p>
+
+      <form class="tool-form" id="sortForm">
+        <textarea id="itemInput" rows="1" placeholder="e.g. a broken glass bottle and some vegetable peels" required></textarea>
+        <button class="btn btn-primary cursor-pointer" type="submit" id="submitBtn">Sort it</button>
+      </form>
+
+      <div class="chips" id="chips">
+        <span class="chip">used tea bags</span>
+        <span class="chip">an old phone charger</span>
+        <span class="chip">expired medicine strips</span>
+        <span class="chip">a pizza box with grease stains</span>
+      </div>
+
+      <div class="state" id="loadingState">
+        <span class="dot-anim"></span><span class="dot-anim"></span><span class="dot-anim"></span>
+        <span>Retrieving local waste-segregation rules&hellip;</span>
+      </div>
+
+      <div class="error-box" id="errorBox"></div>
+
+      <div class="results" id="results"></div>
+
+      <footer class="page-footer">
+        A lightweight retrieval step grounds every answer in a local waste-rules knowledge base before the model responds. Categories follow common Indian municipal solid-waste guidelines (wet / dry / hazardous / e-waste) — always defer to your local municipal rules for anything ambiguous.
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="js/site.js"></script>
+<script src="js/tool.js"></script>
+</body>
+</html>
