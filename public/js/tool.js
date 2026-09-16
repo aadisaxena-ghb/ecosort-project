@@ -402,8 +402,11 @@ async function loadQuiz(){
         if (isCorrect) {
           score++;
           scoreCounter.textContent = `Score: ${score} / ${questions.length}`;
+          window.playChime?.('success');
+          window.fireConfetti?.();
         } else {
           btn.classList.add('incorrect');
+          window.playChime?.('error');
         }
 
         explanationBox.innerHTML = `<b>${isCorrect ? '✅ Correct!' : '❌ Not quite.'}</b> ${escapeHtml(q.explanation)}`;

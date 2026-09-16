@@ -43,40 +43,46 @@
     </button>
 
     <div class="sidebar-footer">
-      <strong>SDG 12</strong><br/>
+      <strong>SDG 12 &middot; 1M1B &amp; IBM SkillsBuild</strong><br/>
       Responsible Consumption &amp; Production<br/><br/>
-      1M1B AI for Sustainability Virtual Internship
+      Built with IBM BOB &amp; Google Gemini AI
     </div>
   </aside>
 
   <main class="main">
     <div class="page">
 
+      <!-- Hero Section -->
       <section class="hero">
         <span class="blob blob-1"></span>
         <span class="blob blob-2"></span>
         <div class="hero-grid">
           <div class="reveal is-visible">
-            <p class="kicker">✨ AI-Powered &middot; UN SDG 12</p>
-            <h1>Every item has<br/><em>a right place.</em><br/>Find it instantly.</h1>
-            <p class="sub">Describe anything you're about to throw away or snap a picture. EcoSort AI uses a retrieval-augmented intelligence pipeline over municipal rules to deliver the exact bin, reasoning, and practical habits for a cleaner planet.</p>
+            <p class="kicker">🌱 AI for Sustainability &middot; UN SDG 12</p>
+            <h1>Every item has<br/><em>a right place.</em><br/>Find it in seconds.</h1>
+            <p class="sub">No more guessing at the trash can. Whether it's greasy takeout boxes or dead batteries, EcoSort AI gives you the exact bin, the human science behind it, and daily green habits that stick.</p>
+            
             <div class="cta-row" style="margin-bottom: 24px;">
-              <a class="btn btn-primary cursor-pointer" href="tool.html">🚀 Try Full Advisor &rarr;</a>
-              <a class="btn btn-ghost cursor-pointer" href="impact.html">📊 See the data</a>
+              <a class="btn btn-primary cursor-pointer" href="tool.html">🚀 Open Waste Advisor &rarr;</a>
+              <a class="btn btn-ghost cursor-pointer" href="impact.html">📊 Explore the Data</a>
             </div>
 
             <!-- Instant Quick Sorter Widget -->
-            <div style="background: var(--paper-translucent); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 14px; padding: 18px; box-shadow: var(--shadow-sm);">
-              <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--moss); margin-bottom:8px;">⚡ Instant Test</div>
+            <div class="card-tilt" style="background: var(--paper-translucent); backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-sm);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--moss);">⚡ Instant Quick Sorter</span>
+                <span style="font-size:11.5px; color:var(--muted);">Grounded in Municipal Rules</span>
+              </div>
               <form id="heroQuickForm" style="display:flex; gap:8px;">
-                <input type="text" id="heroQuickInput" placeholder="Try 'used battery', 'pizza box', 'milk carton'..." style="flex:1; border:1px solid var(--line); background:var(--paper); border-radius:8px; padding:10px 14px; font-size:13.5px; color:var(--ink); outline:none;" required />
-                <button class="btn btn-primary cursor-pointer" type="submit" style="padding:10px 16px; font-size:13.5px;">Sort</button>
+                <input type="text" id="heroQuickInput" placeholder="Try 'egg', 'used battery', 'pizza box', 'crushed can'..." style="flex:1; border:1.5px solid var(--line); background:var(--paper); border-radius:10px; padding:11px 16px; font-size:14px; color:var(--ink); outline:none;" required />
+                <button class="btn btn-primary cursor-pointer" type="submit" style="padding:11px 18px; font-size:14px;">Sort it</button>
               </form>
-              <div id="heroQuickResult" style="display:none; margin-top:12px; padding:12px; border-radius:8px; background:var(--bg-alt); font-size:13px; line-height:1.45;"></div>
+              <div id="heroQuickResult" style="display:none; margin-top:12px; padding:14px; border-radius:10px; background:var(--bg-alt); font-size:13.5px; line-height:1.5; animation:fadeIn .3s ease;"></div>
             </div>
 
           </div>
-          <div class="hero-art reveal is-visible">
+
+          <div class="hero-art reveal is-visible card-tilt">
             <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
               <circle cx="200" cy="200" r="170" fill="var(--bg-alt)"/>
               <circle cx="200" cy="200" r="128" fill="var(--paper)"/>
@@ -97,52 +103,122 @@
         </div>
       </section>
 
+      <!-- Dynamic Marquee Ribbon -->
+      <div class="marquee-wrapper">
+        <div class="marquee-content">
+          <span class="marquee-item"><span class="badge">Fact</span> 1 Recycled Aluminum Can saves enough energy to power a TV for 3 hours.</span>
+          <span class="marquee-item"><span class="badge">SDG 12</span> 62 Million Tonnes of solid waste generated annually in India.</span>
+          <span class="marquee-item"><span class="badge">Habit Tip</span> Tear the clean lid off pizza boxes before composting greasy bases.</span>
+          <span class="marquee-item"><span class="badge">Policy 2026</span> 4-stream source segregation is mandatory for all waste generators.</span>
+          <span class="marquee-item"><span class="badge">Fact</span> 1 Recycled Aluminum Can saves enough energy to power a TV for 3 hours.</span>
+          <span class="marquee-item"><span class="badge">SDG 12</span> 62 Million Tonnes of solid waste generated annually in India.</span>
+          <span class="marquee-item"><span class="badge">Habit Tip</span> Tear the clean lid off pizza boxes before composting greasy bases.</span>
+          <span class="marquee-item"><span class="badge">Policy 2026</span> 4-stream source segregation is mandatory for all waste generators.</span>
+        </div>
+      </div>
+
+      <!-- Interactive Drag & Drop Bin Toss Mini-Game -->
+      <section class="bin-playground reveal" id="binPlayground">
+        <div class="playground-header">
+          <div>
+            <span class="kicker">🎮 Interactive Mini-Game</span>
+            <h3 style="font-family:'Fraunces',serif; margin:4px 0 0; font-size:22px;">Drag &amp; Toss Sorting Challenge</h3>
+          </div>
+          <div class="playground-score">Score: <span id="playgroundScoreVal">0 pts</span></div>
+        </div>
+        <p style="font-size:14px; color:var(--muted); margin:0 0 16px;">Drag any item below and drop it directly into its rightful bin (or click for a hint):</p>
+
+        <!-- Pool of draggable waste items -->
+        <div class="item-pool" id="itemPool"></div>
+
+        <!-- 4 Interactive Target Bins -->
+        <div class="bins-target-grid">
+          <div class="target-bin bin-wet" data-bin="wet">
+            <span class="bin-emoji">🟢</span>
+            <h5 style="color:var(--wet);">Wet / Organic</h5>
+            <p>Compost &amp; Food Scraps</p>
+          </div>
+          <div class="target-bin bin-dry" data-bin="dry">
+            <span class="bin-emoji">🔵</span>
+            <h5 style="color:var(--dry);">Dry / Recyclable</h5>
+            <p>Paper, Plastic &amp; Cans</p>
+          </div>
+          <div class="target-bin bin-hazard" data-bin="hazardous">
+            <span class="bin-emoji">🔴</span>
+            <h5 style="color:var(--hazard);">Hazardous</h5>
+            <p>Toxics, Batteries &amp; Pills</p>
+          </div>
+          <div class="target-bin bin-ewaste" data-bin="ewaste">
+            <span class="bin-emoji">🟣</span>
+            <h5 style="color:var(--ewaste);">E-Waste</h5>
+            <p>Cables, Devices &amp; LEDs</p>
+          </div>
+        </div>
+
+        <div class="feedback-bubble" id="feedbackBubble">💡 Drag an item to start playing!</div>
+      </section>
+
+      <!-- Live Statistical Impact Grid -->
       <section class="stat-strip">
-        <div class="stat-card reveal">
+        <div class="stat-card reveal card-tilt">
           <span class="num"><span data-count-to="62" data-decimals="0" data-suffix="M">0</span> tonnes</span>
           <span class="label">Municipal waste generated in India every year (CPCB)</span>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card reveal card-tilt">
           <span class="num"><span data-count-to="33" data-decimals="0" data-suffix="%">0</span></span>
           <span class="label">Share scientifically segregated at source today</span>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card reveal card-tilt">
           <span class="num">4 Streams</span>
           <span class="label">Wet, Dry, Hazardous, &amp; E-Waste segregation</span>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card reveal card-tilt">
           <span class="num">&lt; 1<span style="font-size:16px">s</span></span>
           <span class="label">Instant grounded answer response time</span>
         </div>
       </section>
 
+      <!-- Human-Centric Feature Bento Grid -->
       <section class="section">
         <div class="section-head reveal">
           <div>
-            <p class="kicker">Why EcoSort AI</p>
-            <h2 class="section-title">Built around one real problem</h2>
+            <p class="kicker">Why It Matters</p>
+            <h2 class="section-title">Designed for real humans, not ideal robots</h2>
           </div>
         </div>
         <div class="feature-grid">
-          <div class="feature-card reveal">
+          <div class="feature-card reveal card-tilt">
             <div class="icon">🎯</div>
             <h3>Grounded, not guessed</h3>
             <p>A fast retrieval step pulls municipal guidelines from a local knowledge base before generating responses — ensuring guidance is explainable and consistent.</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card reveal card-tilt">
             <div class="icon">📸</div>
-            <h3>Smart camera scanner</h3>
+            <h3>Smart Camera Scanner</h3>
             <p>Snap a photo of packaging or upload an image directly to classify complex mixed waste on the go.</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card reveal card-tilt">
             <div class="icon">🌱</div>
-            <h3>Habit building &amp; streaks</h3>
+            <h3>Habit Building &amp; Streaks</h3>
             <p>Earn Eco-Badges, maintain daily sorting streaks, and calculate your household's annual landfill diversion.</p>
           </div>
         </div>
       </section>
 
-      <section class="section reveal">
+      <!-- Human Persona Card -->
+      <div class="persona-card reveal card-tilt">
+        <div style="display:flex; align-items:center; gap:18px;">
+          <div class="persona-badge-glow">🌟</div>
+          <div>
+            <h3 style="font-family:'Fraunces',serif; margin:0 0 6px; font-size:20px;">Ready to test your eco-sorting knowledge?</h3>
+            <p style="margin:0; font-size:14px; color:var(--muted); max-width:48ch;">Take the 5-round Eco-Quiz, earn badges, and discover your waste reduction persona!</p>
+          </div>
+        </div>
+        <a class="btn btn-primary cursor-pointer" href="tool.html#quiz">Take the Eco-Quiz &rarr;</a>
+      </div>
+
+      <!-- Call to Action Banner -->
+      <section class="section reveal" style="margin-top:50px;">
         <div style="background: linear-gradient(135deg, var(--forest-deep), #1b3826); border-radius: 20px; padding: 46px 44px; display:flex; align-items:center; justify-content:space-between; gap: 24px; flex-wrap:wrap; box-shadow: var(--shadow);">
           <div>
             <h2 class="section-title" style="color:#fff; margin-bottom:8px;">Ready to sort something?</h2>
@@ -153,7 +229,7 @@
       </section>
 
       <footer class="page-footer">
-        EcoSort AI &middot; A project for the 1M1B AI for Sustainability Virtual Internship, aligned with UN SDG 12 (Responsible Consumption &amp; Production).
+        EcoSort AI &middot; A project for the 1M1B AI for Sustainability Virtual Internship in collaboration with IBM SkillsBuild &amp; AICTE, aligned with UN SDG 12.
       </footer>
 
     </div>
