@@ -1,3 +1,2 @@
-# GitHub Linguist Language Configuration
-# Prioritize JavaScript / Node.js backend in repository language stats
-*.css linguist-detectable=false
+# Auto-detect text files and perform line-ending normalization
+* text=auto
