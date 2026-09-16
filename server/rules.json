@@ -1,5 +1,21 @@
 [
   {
+    "id": "hazard-radioactive",
+    "category": "hazardous",
+    "bin_name": "Specialized Radioactive / Nuclear Regulatory Disposal (DO NOT BIN)",
+    "keywords": ["uranium", "plutonium", "thorium", "radium", "radioactive", "nuclear", "isotope", "americium", "radiation"],
+    "guidance": "Radioactive elements and nuclear substances (such as Uranium or Radium) are strictly regulated hazardous materials emitting ionizing radiation. They must NEVER be placed in any household or municipal waste bin.",
+    "tip": "Contact national atomic energy or hazardous environmental regulatory authorities immediately for certified containment protocols."
+  },
+  {
+    "id": "hazard-toxic-industrial",
+    "category": "hazardous",
+    "bin_name": "Hazardous Waste Collection (Red/Black)",
+    "keywords": ["asbestos", "cyanide", "acid", "hydrochloric", "sulfuric", "mercury", "poison", "arsenic", "lead metal", "explosive", "ammunition", "fireworks", "gunpowder"],
+    "guidance": "Extremely toxic, caustic, explosive, or carcinogenic industrial materials must never be mixed with regular municipal or recyclable trash.",
+    "tip": "Store in sealed, corrosion-proof chemical containers and arrange specialized pickup with certified hazardous material handlers."
+  },
+  {
     "id": "wet-food",
     "category": "wet",
     "bin_name": "Wet / Organic bin (Green)",
