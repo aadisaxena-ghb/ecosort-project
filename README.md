@@ -2,7 +2,7 @@
 
 An intelligent, AI-powered waste segregation advisor that tells you exactly which bin an item belongs in — **Wet**, **Dry**, **Hazardous**, or **E-Waste** — with clear reasoning and practical habit tips, grounded in municipal waste-segregation rules.
 
-Built for the **1M1B AI for Sustainability Virtual Internship**, aligned with **UN SDG 12: Responsible Consumption and Production** (secondary: SDG 11, Sustainable Cities and Communities).
+Aligned with **UN SDG 12: Responsible Consumption and Production** (secondary: SDG 11, Sustainable Cities and Communities).
 
 ---
 
@@ -53,7 +53,6 @@ Response        ──►  Bin Category + Color Tag + Plain-Language Reason + Ha
 1. **Ideation & Problem Definition (Stage 1 & 2):** Used IBM BOB to analyze municipal waste reports (CPCB), profile user pain points, and craft the central Design Thinking question: *"How might we use AI to guide instant, accurate waste segregation so that households and campuses can become more sustainable?"*
 2. **Knowledge Base Structuring:** Utilized IBM BOB to extract and organize Indian Solid Waste Management (SWM) rules into structured JSON grounding categories (Wet, Dry, Hazardous, E-Waste).
 3. **Prompt & RAG Architecture Design:** Iteratively refined system prompts and contextual retrieval schemas with IBM BOB to ensure explainable, hallucination-free outputs.
-
 
 ---
 
@@ -112,5 +111,6 @@ ecosort-ai/
 
 ## 👤 Author
 
-**Aadi Saxena** — SRMIST Delhi-NCR, Ghaziabad  
-Built as the final project for the 1M1B AI for Sustainability Virtual Internship (in collaboration with IBM SkillsBuild & AICTE).
+**Aadi Saxena** — Full-Stack AI Engineer · Creator of EcoSort AI  
+[GitHub Profile](https://github.com/aadisaxena-ghb)
+
